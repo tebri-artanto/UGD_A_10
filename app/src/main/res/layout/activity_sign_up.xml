@@ -6,22 +6,41 @@
     android:layout_height="match_parent"
     tools:context=".SignUp">
 
+    <TextView
+        style="@style/TextAppearance.MaterialComponents.Headline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:text="Sign Up"
+        app:layout_constraintEnd_toEndOf="@+id/tvSignUp"
+        app:layout_constraintStart_toStartOf="@+id/tvSignUp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="620dp" />
+
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="40dp"
         android:layout_marginEnd="30dp"
-        android:paddingTop="20dp"
+        android:paddingTop="100dp"
         android:paddingBottom="20dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSignUp">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputLayoutName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:hint="Name"
+            android:hint="Username"
             app:errorEnabled="true"
             android:layout_marginBottom="1dp">
 
@@ -39,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:hint="Email"
+            android:hint="Password"
             app:errorEnabled="true"
             android:layout_marginBottom="1dp">
 
@@ -57,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:hint="Phone Number"
+            android:hint="Email"
             app:errorEnabled="true"
             android:layout_marginBottom="1dp">
 
@@ -75,10 +94,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:hint="Password"
-            app:errorEnabled="true"
-
-            >
+            android:hint="Tanggal Lahir"
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -94,9 +111,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:hint="Password"
-            app:errorEnabled="true"
-            >
+            android:hint="Nomor Telepon"
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
