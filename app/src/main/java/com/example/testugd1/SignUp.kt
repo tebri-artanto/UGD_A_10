@@ -47,15 +47,24 @@ class SignUp : AppCompatActivity() {
             checkSignUp = false
         }
 
-        if (username.isEmpty()){
-            inputUsername.setError("Username must be filled with text")
+        if (email.isEmpty()){
+            inputEmail.setError("Email must be filled with text")
             checkSignUp = false
         }
 
-        if (username.isEmpty()){
-            inputUsername.setError("Username must be filled with text")
+        if (tanggalLahir.isEmpty()){
+            inputTangalLahir.setError("Tanggal Lahir must be filled with text")
             checkSignUp = false
             }
+
+        if (noTelpon.isEmpty()){
+            inputNoTelpon.setError("No Telpon must be filled with text")
+        }
+            if (username.isNotEmpty() && password.isNotEmpty() && email.isNotEmpty() &&
+                tanggalLahir.isNotEmpty() && tanggalLahir.isNotEmpty()) checkSignUp = true
+            if (!checkSignUp) return@OnClickListener
+            val moveHome = Intent(this@SignUp, MainActivity::class.java)
+            startActivity(moveHome)
         })
 
         setContentView(R.layout.activity_sign_up)
