@@ -12,11 +12,14 @@ import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.textview.MaterialTextView
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var username: TextInputLayout
+    private lateinit var password: TextInputLayout
     private lateinit var mainLayout: ConstraintLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        
         val btnSignUp: TextView = findViewById(R.id.tvSignUp)
 
         btnSignUp.setOnClickListener{
