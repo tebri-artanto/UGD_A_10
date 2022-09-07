@@ -42,6 +42,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:hint="Username"
             app:errorEnabled="true"
+            app:startIconDrawable="@drawable/ic_user_24"
             android:layout_marginBottom="1dp">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -60,6 +61,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:hint="Password"
             app:errorEnabled="true"
+            app:startIconDrawable="@drawable/ic_lock_24"
             android:layout_marginBottom="1dp">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -78,6 +80,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:hint="Email"
             app:errorEnabled="true"
+            app:startIconDrawable="@drawable/ic_email_24"
             android:layout_marginBottom="1dp">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -95,7 +98,8 @@
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:hint="Tanggal Lahir"
-            app:errorEnabled="true">
+            app:errorEnabled="true"
+            app:startIconDrawable="@drawable/ic_date_24">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -112,7 +116,8 @@
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:hint="Nomor Telepon"
-            app:errorEnabled="true">
+            app:errorEnabled="true"
+            app:startIconDrawable="@drawable/ic_call_24">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
