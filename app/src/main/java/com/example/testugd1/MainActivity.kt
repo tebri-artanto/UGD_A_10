@@ -23,10 +23,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         getBundle()
-       // setText()
+        setText()
 
-        inputusername = findViewById(R.id.inputUsername)
-        inputpassword = findViewById(R.id.inputPassword)
+
 
         
         val btnSignUp: TextView = findViewById(R.id.tvSignUp)
@@ -39,6 +38,8 @@ class MainActivity : AppCompatActivity() {
 
         btnLogin.setOnClickListener(View.OnClickListener {
             var checkLogin = false
+            inputusername = findViewById(R.id.inputUsername)
+            inputpassword = findViewById(R.id.inputPassword)
             val username: String = inputusername.getEditText()?.getText().toString()
             val password: String = inputpassword.getEditText()?.getText().toString()
 
@@ -55,7 +56,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             //Password NPM
-            if (username == mBundle.getString("nama") && password == mBundle.getString("password")) checkLogin = true
+            if (username == mBundle.getString("username") && password == mBundle.getString("password")) checkLogin = true
             if (!checkLogin) return@OnClickListener
             val moveHome = Intent(this@MainActivity, HomeActivity::class.java)
             startActivity(moveHome)
@@ -67,7 +68,12 @@ class MainActivity : AppCompatActivity() {
 
     fun getBundle() {
         mBundle = intent.getBundleExtra("signUp")!!
-        vUsername = mBundle.getString("username")
+        vUsername = mBundle.getString("username")!!
 
+    }
+
+    fun setText() {
+        inputusername = findViewById(R.id.inputLayoutUsername)
+        inputusername.getEditText()?.setText(vUsername).toString()
     }
 }
