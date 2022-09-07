@@ -6,15 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
-<LinearLayout
-    android:id="@+id/linearLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<!--<LinearLayout-->
+<!--    android:id="@+id/linearLayout"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
 
-    <com.google.android.material.button.MaterialButton
-    startIconDrawabae
-        />
+<!--    <com.google.android.material.button.MaterialButton-->
+<!--    startIconDrawabae-->
+<!--        />-->
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

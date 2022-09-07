@@ -12,20 +12,62 @@ import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.textview.MaterialTextView
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var username: TextInputLayout
-    private lateinit var password: TextInputLayout
+    private lateinit var inputusername: TextInputLayout
+    private lateinit var inputpassword: TextInputLayout
     private lateinit var mainLayout: ConstraintLayout
+    lateinit var mBundle: Bundle
+    lateinit var vUsername: String
+    lateinit var vPassword: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        getBundle()
+       // setText()
+
+        inputusername = findViewById(R.id.inputUsername)
+        inputpassword = findViewById(R.id.inputPassword)
 
         
         val btnSignUp: TextView = findViewById(R.id.tvSignUp)
+        val btnLogin: Button = findViewById(R.id.btnLogin)
 
         btnSignUp.setOnClickListener{
             val moveSignUp = Intent(this@MainActivity, SignUp::class.java)
             startActivity(moveSignUp)
         }
+
+        btnLogin.setOnClickListener(View.OnClickListener {
+            var checkLogin = false
+            val username: String = inputusername.getEditText()?.getText().toString()
+            val password: String = inputpassword.getEditText()?.getText().toString()
+
+            //Pengecekan apakah inputan usernamme kososng
+            if (username.isEmpty()){
+                inputusername.setError("Username must be filled with text")
+                checkLogin  = false
+            }
+
+            //Pengecekan apakah inputan password kososng
+            if (password.isEmpty()){
+                inputpassword.setError("Password must be filled with text")
+                checkLogin  = false
+            }
+
+            //Password NPM
+            if (username == mBundle.getString("nama") && password == mBundle.getString("password")) checkLogin = true
+            if (!checkLogin) return@OnClickListener
+            val moveHome = Intent(this@MainActivity, HomeActivity::class.java)
+            startActivity(moveHome)
+        })
+
+
+
+    }
+
+    fun getBundle() {
+        mBundle = intent.getBundleExtra("signUp")!!
+        vUsername = mBundle.getString("username")
 
     }
 }
