@@ -63,7 +63,7 @@ class SignUp : AppCompatActivity() {
             }
 
             if (username.isNotEmpty() && password.isNotEmpty() && email.isNotEmpty() &&
-                tanggalLahir.isNotEmpty() && tanggalLahir.isNotEmpty()) {
+                tanggalLahir.isNotEmpty() && noTelpon.isNotEmpty()) {
                 mBundle.putString("username", inputUsername.getEditText()?.getText().toString())
                 mBundle.putString("password", inputPassword.getEditText()?.getText().toString())
                 intent.putExtra("signUp", mBundle)
