@@ -17,7 +17,6 @@ class SignUp : AppCompatActivity() {
     private lateinit var inputEmail: TextInputLayout
     private lateinit var inputTangalLahir: TextInputLayout
     private lateinit var inputNoTelpon: TextInputLayout
-    private lateinit var btnSignUp: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,10 +26,9 @@ class SignUp : AppCompatActivity() {
         inputEmail = findViewById(R.id.inputLayoutEmail)
         inputTangalLahir = findViewById(R.id.inputLayoutTanggalLahir)
         inputNoTelpon = findViewById(R.id.inputLayoutNoTelpon)
+        val btnSignUp2: Button = findViewById(R.id.btnSignUp)
 
-        btnSignUp = findViewById(R.id.btnSignUp)
-
-        btnSignUp.setOnClickListener(View.OnClickListener {
+        btnSignUp2.setOnClickListener(View.OnClickListener {
             val intent = Intent(this,MainActivity::class.java)
             val mBundle = Bundle()
             var checkSignUp = false

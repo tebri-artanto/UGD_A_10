@@ -22,14 +22,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        getBundle()
-        setText()
-
-
-
+        //getBundle()
+        //setText()
         
         val btnSignUp: TextView = findViewById(R.id.tvSignUp)
         val btnLogin: Button = findViewById(R.id.btnLogin)
+        inputusername = findViewById(R.id.inputUsername)
+        inputpassword = findViewById(R.id.inputPassword)
 
         btnSignUp.setOnClickListener{
             val moveSignUp = Intent(this@MainActivity, SignUp::class.java)
@@ -38,8 +37,7 @@ class MainActivity : AppCompatActivity() {
 
         btnLogin.setOnClickListener(View.OnClickListener {
             var checkLogin = false
-            inputusername = findViewById(R.id.inputUsername)
-            inputpassword = findViewById(R.id.inputPassword)
+
             val username: String = inputusername.getEditText()?.getText().toString()
             val password: String = inputpassword.getEditText()?.getText().toString()
 
