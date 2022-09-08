@@ -17,16 +17,18 @@ class SignUp : AppCompatActivity() {
     private lateinit var inputEmail: TextInputLayout
     private lateinit var inputTangalLahir: TextInputLayout
     private lateinit var inputNoTelpon: TextInputLayout
+    private lateinit var btnSignUp2: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setContentView(R.layout.activity_sign_up)
         inputUsername = findViewById(R.id.inputLayoutUsername)
         inputPassword = findViewById(R.id.inputLayoutPassword)
         inputEmail = findViewById(R.id.inputLayoutEmail)
         inputTangalLahir = findViewById(R.id.inputLayoutTanggalLahir)
         inputNoTelpon = findViewById(R.id.inputLayoutNoTelpon)
-        val btnSignUp2: Button = findViewById(R.id.btnSignUp)
+        btnSignUp2 = findViewById(R.id.btnSignUp)
 
         btnSignUp2.setOnClickListener(View.OnClickListener {
             val intent = Intent(this,MainActivity::class.java)
