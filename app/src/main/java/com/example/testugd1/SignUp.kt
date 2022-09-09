@@ -17,7 +17,6 @@ class SignUp : AppCompatActivity() {
     private lateinit var inputEmail: TextInputLayout
     private lateinit var inputTangalLahir: TextInputLayout
     private lateinit var inputNoTelpon: TextInputLayout
-    private lateinit var btnSignUp2: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,12 +27,12 @@ class SignUp : AppCompatActivity() {
         inputEmail = findViewById(R.id.inputLayoutEmail)
         inputTangalLahir = findViewById(R.id.inputLayoutTanggalLahir)
         inputNoTelpon = findViewById(R.id.inputLayoutNoTelpon)
-        btnSignUp2 = findViewById(R.id.btnSignUp)
+        val btnSignUp2: Button = findViewById(R.id.btnSignUp)
 
         btnSignUp2.setOnClickListener(View.OnClickListener {
-            val intent = Intent(this,MainActivity::class.java)
-            val mBundle = Bundle()
             var checkSignUp = false
+            val mBundle = Bundle()
+
             var username: String = inputUsername.getEditText()?.getText().toString()
             var password: String = inputUsername.getEditText()?.getText().toString()
             var email: String = inputUsername.getEditText()?.getText().toString()
@@ -64,18 +63,20 @@ class SignUp : AppCompatActivity() {
                 inputNoTelpon.setError("No Telpon must be filled with text")
             }
 
-            if (username.isNotEmpty() && password.isNotEmpty() && email.isNotEmpty() &&
-                tanggalLahir.isNotEmpty() && noTelpon.isNotEmpty()) {
-                mBundle.putString("username", inputUsername.getEditText()?.getText().toString())
-                mBundle.putString("password", inputPassword.getEditText()?.getText().toString())
-                intent.putExtra("signUp", mBundle)
+            if (username.isNotEmpty() && password.isNotEmpty() && email.isNotEmpty() && tanggalLahir.isNotEmpty() && noTelpon.isNotEmpty()) {
                 checkSignUp = true
             }
             if (!checkSignUp) return@OnClickListener
-            val moveHome = Intent(this@SignUp, MainActivity::class.java)
-            startActivity(moveHome)
+            if(checkSignUp == true){
+                mBundle.putString("username", inputUsername.getEditText()?.getText().toString())
+                mBundle.putString("password", inputPassword.getEditText()?.getText().toString())
+                val moveHome = Intent(this, MainActivity::class.java)
+                moveHome.putExtras(mBundle)
+                startActivity(moveHome)
+            }
+
         })
 
-        setContentView(R.layout.activity_sign_up)
+
     }
 }

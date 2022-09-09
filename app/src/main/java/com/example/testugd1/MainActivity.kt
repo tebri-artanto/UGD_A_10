@@ -8,12 +8,13 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.textview.MaterialTextView
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var inputusername: TextInputLayout
-    private lateinit var inputpassword: TextInputLayout
+    private lateinit var inputusername: TextInputEditText
+    private lateinit var inputpassword: TextInputEditText
     private lateinit var mainLayout: ConstraintLayout
     lateinit var mBundle: Bundle
     lateinit var vUsername: String
@@ -23,12 +24,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 //        getBundle()
-//        setText()
+        setText()
         
         val btnSignUp: TextView = findViewById(R.id.tvSignUp)
         val btnLogin: Button = findViewById(R.id.btnLogin)
-        inputusername = findViewById(R.id.inputUsername)
-        inputpassword = findViewById(R.id.inputPassword)
+        inputusername = findViewById(R.id.inputTextUsername)
+        inputpassword = findViewById(R.id.inputTextPassword)
 
         btnSignUp.setOnClickListener{
             val moveSignUp = Intent(this@MainActivity, SignUp::class.java)
@@ -36,49 +37,43 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnLogin.setOnClickListener(View.OnClickListener {
-            if(mBundle.isEmpty){
-                var checkLogin = false
-                val username: String = inputusername.getEditText()?.getText().toString()
-                val password: String = inputpassword.getEditText()?.getText().toString()
+            var checkLogin = false
+            val username: String = inputusername.getText().toString()
+            val password: String = inputpassword.getText().toString()
 
-                //Pengecekan apakah inputan usernamme kososng
-                if (username.isEmpty()){
-                    inputusername.setError("Username must be filled with text")
-                    checkLogin  = false
-                }
+            if (username.isEmpty()){
+                inputusername.setError("Username must be filled with text")
+                checkLogin  = false
+            }
 
-                //Pengecekan apakah inputan password kososng
-                if (password.isEmpty()){
-                    inputpassword.setError("Password must be filled with text")
-                    checkLogin  = false
-                }
+            if (password.isEmpty()){
+                inputpassword.setError("Password must be filled with text")
+                checkLogin  = false
+            }
 
-                //Password NPM
-                if (!checkLogin) return@OnClickListener
-            } else{
-                var checkLogin = false
+            if (username.isEmpty()){
+                inputusername.setError("Username must be filled with text")
+                checkLogin  = false
+            }
 
-                val username: String = inputusername.getEditText()?.getText().toString()
-                val password: String = inputpassword.getEditText()?.getText().toString()
-
-                //Pengecekan apakah inputan usernamme kososng
-                if (username.isEmpty()){
-                    inputusername.setError("Username must be filled with text")
-                    checkLogin  = false
-                }
-
-                //Pengecekan apakah inputan password kososng
-                if (password.isEmpty()){
-                    inputpassword.setError("Password must be filled with text")
-                    checkLogin  = false
-                }
-
-                //Password NPM
+            if (password.isEmpty()){
+                inputpassword.setError("Password must be filled with text")
+                checkLogin  = false
+            }
+            val mBundle = intent.extras
+            if (mBundle != null){
                 if (username == mBundle.getString("username") && password == mBundle.getString("password")) checkLogin = true
-                if (!checkLogin) return@OnClickListener
-                val moveHome = Intent(this@MainActivity, HomeActivity::class.java)
+
+            }
+
+
+            if (!checkLogin) return@OnClickListener
+            if (checkLogin==true){
+                val moveHome = Intent(this, HomeActivity::class.java)
                 startActivity(moveHome)
             }
+
+
 
         })
 
@@ -86,14 +81,12 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun getBundle() {
-        mBundle = intent.getBundleExtra("signUp")!!
-        vUsername = mBundle.getString("username")!!
-
-    }
-
     fun setText() {
-        inputusername = findViewById(R.id.inputLayoutUsername)
-        inputusername.getEditText()?.setText(vUsername).toString()
+        inputusername = findViewById(R.id.inputTextUsername)
+        inputpassword = findViewById(R.id.inputTextPassword)
+        val mBundle = intent.extras
+        if (mBundle != null){
+            inputusername.setText(mBundle.getString("username"))
+        }
     }
 }
