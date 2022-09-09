@@ -16,9 +16,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var inputusername: TextInputEditText
     private lateinit var inputpassword: TextInputEditText
     private lateinit var mainLayout: ConstraintLayout
-    lateinit var mBundle: Bundle
-    lateinit var vUsername: String
-    lateinit var vPassword: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,6 +76,7 @@ class MainActivity : AppCompatActivity() {
         val mBundle = intent.extras
         if (mBundle != null){
             inputusername.setText(mBundle.getString("username"))
+            inputpassword.setText(mBundle.getString("password"))
         }
     }
 }

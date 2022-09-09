@@ -2,7 +2,7 @@ package com.example.testugd1.Entity
 
 import com.example.testugd1.R
 
-class TempatPariwisata (var Nama_Tempat:String, var Kapasitas:Int) {
+class TempatPariwisata (var Nama_Tempat: String, var Kapasitas: Int) {
     companion object{
         var litsOfKelas = arrayOf(
             TempatPariwisata("Embung Nglanggeran", 1000),
@@ -14,7 +14,7 @@ class TempatPariwisata (var Nama_Tempat:String, var Kapasitas:Int) {
             TempatPariwisata("Gerbang Banyu Langit", 500),
             TempatPariwisata("Jogja Bay", 1000),
             TempatPariwisata("Mangrove Jembatan Api", 1000),
-            TempatPariwisata("Pinus Asri", 2000),
+            TempatPariwisata("Pinus Asri", 2000)
         )
     }
 }

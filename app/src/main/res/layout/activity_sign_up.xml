@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/et_style"
                 android:backgroundTint="#F6F6F6"
-                android:inputType="text" />
+                android:inputType="textPassword"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -104,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/et_style"
                 android:backgroundTint="#F6F6F6"
-                android:inputType="textPassword" />
+                android:inputType="text"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -122,7 +122,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/et_style"
                 android:backgroundTint="#F6F6F6"
-                android:inputType="textPassword" />
+                android:inputType="text"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
