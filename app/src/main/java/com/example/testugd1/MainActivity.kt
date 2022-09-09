@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        supportActionBar?.hide()
 //        getBundle()
         setText()
         
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         val btnLogin: Button = findViewById(R.id.btnLogin)
         inputusername = findViewById(R.id.inputTextUsername)
         inputpassword = findViewById(R.id.inputTextPassword)
+        mainLayout = findViewById(R.id.mainLayout)
 
         btnSignUp.setOnClickListener{
             val moveSignUp = Intent(this@MainActivity, SignUp::class.java)
