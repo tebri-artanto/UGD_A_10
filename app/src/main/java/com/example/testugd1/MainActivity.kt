@@ -24,16 +24,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
-//        getBundle()
+        getBundle()
         setText()
-        
+
         val btnSignUp: TextView = findViewById(R.id.tvSignUp)
         val btnLogin: Button = findViewById(R.id.btnLogin)
         inputusername = findViewById(R.id.inputTextUsername)
         inputpassword = findViewById(R.id.inputTextPassword)
         mainLayout = findViewById(R.id.mainLayout)
 
-        btnSignUp.setOnClickListener{
+        btnSignUp.setOnClickListener {
             val moveSignUp = Intent(this@MainActivity, SignUp::class.java)
             startActivity(moveSignUp)
         }
@@ -43,41 +43,39 @@ class MainActivity : AppCompatActivity() {
             val username: String = inputusername.getText().toString()
             val password: String = inputpassword.getText().toString()
 
-            if (username.isEmpty()){
+            if (username.isEmpty()) {
                 inputusername.setError("Username must be filled with text")
-                checkLogin  = false
+                checkLogin = false
             }
-
-            if (password.isEmpty()){
+            if (password.isEmpty()) {
                 inputpassword.setError("Password must be filled with text")
-                checkLogin  = false
+                checkLogin = false
             }
-
-
             val mBundle = intent.extras
-            if (mBundle != null){
-                if (username == mBundle.getString("username") && password == mBundle.getString("password")) checkLogin = true
+            if (mBundle != null) {
+                if (username == mBundle.getString("username") && password == mBundle.getString("password")) checkLogin =
+                    true
 
             }
-
-
             if (!checkLogin) return@OnClickListener
-            if (checkLogin==true){
-                val moveHome = Intent(this@MainActivity, HomeActivity::class.java)
+            if (checkLogin == true) {
+                val moveHome = Intent(this, HomeActivity::class.java)
                 startActivity(moveHome)
             }
 
 
-
         })
-
-
-
     }
 
-    fun setText() {
+
+
+
+    fun getBundle(){
         inputusername = findViewById(R.id.inputTextUsername)
         inputpassword = findViewById(R.id.inputTextPassword)
+    }
+    fun setText() {
+
         val mBundle = intent.extras
         if (mBundle != null){
             inputusername.setText(mBundle.getString("username"))
