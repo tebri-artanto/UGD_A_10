@@ -51,15 +51,7 @@ class MainActivity : AppCompatActivity() {
                 checkLogin  = false
             }
 
-            if (username.isEmpty()){
-                inputusername.setError("Username must be filled with text")
-                checkLogin  = false
-            }
 
-            if (password.isEmpty()){
-                inputpassword.setError("Password must be filled with text")
-                checkLogin  = false
-            }
             val mBundle = intent.extras
             if (mBundle != null){
                 if (username == mBundle.getString("username") && password == mBundle.getString("password")) checkLogin = true
@@ -69,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
             if (!checkLogin) return@OnClickListener
             if (checkLogin==true){
-                val moveHome = Intent(this, HomeActivity::class.java)
+                val moveHome = Intent(this@MainActivity, HomeActivity::class.java)
                 startActivity(moveHome)
             }
 

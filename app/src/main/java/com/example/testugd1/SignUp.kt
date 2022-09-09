@@ -63,9 +63,8 @@ class SignUp : AppCompatActivity() {
                 inputNoTelpon.setError("No Telpon must be filled with text")
             }
 
-            if (username.isNotEmpty() && password.isNotEmpty() && email.isNotEmpty() && tanggalLahir.isNotEmpty() && noTelpon.isNotEmpty()) {
-                checkSignUp = true
-            }
+            if (username.isNotEmpty() && password.isNotEmpty() && email.isNotEmpty() && tanggalLahir.isNotEmpty() && noTelpon.isNotEmpty()) checkSignUp = true
+
             if (!checkSignUp) return@OnClickListener
             if(checkSignUp == true){
                 mBundle.putString("username", inputUsername.getEditText()?.getText().toString())
