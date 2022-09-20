@@ -4,9 +4,12 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class Note (
+data class User (
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val title: String,
-    val note: String
+    val username: String,
+    val password: String,
+    val email: String,
+    val tanggalLahir: String,
+    val noTelpon: String,
 )

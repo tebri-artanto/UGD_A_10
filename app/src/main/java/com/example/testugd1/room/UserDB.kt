@@ -6,13 +6,13 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [Note::class],
+    entities = [User::class],
     version = 1
 )
-abstract class NoteDB: RoomDatabase() {
-    abstract fun noteDao() : NoteDao
+abstract class UserDB: RoomDatabase() {
+    abstract fun userDao() : UserDao
     companion object {
-        @Volatile private var instance : NoteDB? = null
+        @Volatile private var instance : UserDB? = null
         private val LOCK = Any()
         operator fun invoke(context: Context) = instance ?:
         synchronized(LOCK){
@@ -23,8 +23,8 @@ abstract class NoteDB: RoomDatabase() {
         private fun buildDatabase(context: Context) =
             Room.databaseBuilder(
                 context.applicationContext,
-                NoteDB::class.java,
-                "note12345.db"
+                UserDB::class.java,
+                "userPariwisata.db"
             ).build()
     }
 }
