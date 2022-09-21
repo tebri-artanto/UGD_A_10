@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/New folder/PBP/TEST/app/src/main/res/drawable/btc_color_green.xml" value="0.1745" />
         <entry key="..\:/New folder/PBP/TEST/app/src/main/res/drawable/btn_bg_green.xml" value="0.2295" />
+        <entry key="..\:/New folder/PBP/TEST/app/src/main/res/drawable/et_round_biasa.xml" value="0.1665" />
         <entry key="..\:/New folder/PBP/TEST/app/src/main/res/drawable/et_style.xml" value="0.2265" />
         <entry key="..\:/New folder/PBP/TEST/app/src/main/res/drawable/et_stylesuperrounded.xml" value="0.1745" />
         <entry key="..\:/New folder/PBP/TEST/app/src/main/res/drawable/ic_home_24.xml" value="0.127" />
@@ -15,7 +16,7 @@
         <entry key="..\:/New folder/PBP/TEST/app/src/main/res/layout/activity_bottom_navigation.xml" value="0.26313405797101447" />
         <entry key="..\:/New folder/PBP/TEST/app/src/main/res/layout/activity_home.xml" value="0.264" />
         <entry key="..\:/New folder/PBP/TEST/app/src/main/res/layout/activity_login.xml" value="0.22826086956521738" />
-        <entry key="..\:/New folder/PBP/TEST/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/New folder/PBP/TEST/app/src/main/res/layout/activity_main.xml" value="0.1458966565349544" />
         <entry key="..\:/New folder/PBP/TEST/app/src/main/res/layout/activity_sign_up.xml" value="0.2625" />
         <entry key="..\:/New folder/PBP/TEST/app/src/main/res/layout/fragment.xml" value="0.1" />
         <entry key="..\:/New folder/PBP/TEST/app/src/main/res/layout/fragment_home.xml" value="0.22871376811594202" />
