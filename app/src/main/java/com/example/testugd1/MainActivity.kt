@@ -67,19 +67,19 @@ class MainActivity : AppCompatActivity() {
 
     inner class NoteViewHolder( val view: View) : RecyclerView.ViewHolder(view)
 
-    override fun onBindViewHolder(holder: NoteViewHolder, position: Int){
-        val note = notes[position]
-        holder.view.text_title.text = note.title
-        holder.view.text_title.setOnClickListener{
-            listener.onClick(note)
-        }
-        holder.view.icon_edit.setOnClickListener {
-            listener.onUpdate(note)
-        }
-        holder.view.icon_delete.setOnClickListener {
-            listener.onDelete(note)
-        }
-    }
+//    override fun onBindViewHolder(holder: NoteViewHolder, position: Int){
+//        val note = notes[position]
+//        holder.view.text_title.text = note.title
+//        holder.view.text_title.setOnClickListener{
+//            listener.onClick(note)
+//        }
+//        holder.view.icon_edit.setOnClickListener {
+//            listener.onUpdate(note)
+//        }
+//        holder.view.icon_delete.setOnClickListener {
+//            listener.onDelete(note)
+//        }
+//    }
 
 
     fun getBundle(){
