@@ -40,6 +40,30 @@
         android:gravity="top"
         android:background="@drawable/edittextstyle"/>
 
+    <EditText
+        android:id="@+id/edit_harga"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Harga"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_note"
+        android:layout_marginTop="10dp"
+        android:gravity="top"
+        android:background="@drawable/edittextstyle"/>
+
+    <EditText
+        android:id="@+id/edit_tipe"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Tipe"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_harga"
+        android:layout_marginTop="10dp"
+        android:gravity="top"
+        android:background="@drawable/edittextstyle"/>
+
     <Button
         android:id="@+id/button_save"
         android:layout_width="0dp"
@@ -48,7 +72,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_note"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="150dp"/>
 
     <Button
         android:id="@+id/button_update"
