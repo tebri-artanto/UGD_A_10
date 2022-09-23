@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/homeAnctivity"
-    tools:context=".homeFragment">
+    tools:context=".homeMenu.homeFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_tempat_pariwisata"

@@ -1,4 +1,4 @@
-package com.example.testugd1
+package com.example.testugd1.homeMenu
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testugd1.Entity.TempatPariwisata
+import com.example.testugd1.R
+import com.example.testugd1.tidakDipakai.rvTempatPariwisata
 
 
 class homeFragment : Fragment() {

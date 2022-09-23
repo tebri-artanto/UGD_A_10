@@ -1,4 +1,4 @@
-package com.example.testugd1
+package com.example.testugd1.tidakDipakai
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testugd1.Entity.TempatPariwisata
+import com.example.testugd1.R
 
 class rvTempatPariwisata(private val data: Array<TempatPariwisata>) : RecyclerView.Adapter<rvTempatPariwisata.viewHolder>()  {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewHolder {

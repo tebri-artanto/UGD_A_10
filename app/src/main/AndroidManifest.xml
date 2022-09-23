@@ -15,7 +15,7 @@
         tools:targetApi="31">
         <activity
 
-            android:name=".PariwisataAdapater"
+            android:name=".homeMenu.PariwisataAdapater"
             android:exported="false" />
         <activity
             android:name=".EditActivity"

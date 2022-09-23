@@ -1,7 +1,8 @@
-package com.example.testugd1
+package com.example.testugd1.homeMenu
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.testugd1.R
 
 class PariwisataAdapater : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
