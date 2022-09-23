@@ -1,6 +1,7 @@
 package com.example.testugd1
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,7 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.testugd1.databinding.FragmentProfileBinding
+import com.example.testugd1.room.Constant
 import com.example.testugd1.room.UserDB
+import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,8 +25,6 @@ class profileFragment : Fragment() {
     private val id = "idKey"
     private val mypref= "myPref"
 
-
-    private lateinit var userDB: UserDB
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
     var sharedPreferences : SharedPreferences? = null
@@ -39,16 +40,10 @@ class profileFragment : Fragment() {
         val layoutManager = LinearLayoutManager(context)
         sharedPreferences = activity?.getSharedPreferences(mypref, Context.MODE_PRIVATE)
         val id = sharedPreferences!!.getInt(id, 0)
-        val pw = sharedPreferences!!.getString(mypref, "")
-        // set actionbar title
-       // (activity as HomeActivity).setActionBarTitle("Profile Management")
-
-        // get session
 
 
         CoroutineScope(Dispatchers.IO).launch {
             val user = db?.userDao()?.getUser(id)?.get(0)
-
                 binding.textViewNama.setText(user?.username)
                 binding.textViewUsername.setText(user?.username)
                 binding.textViewEmail.setText(user?.email)
@@ -56,7 +51,16 @@ class profileFragment : Fragment() {
                 binding.textViewPhone.setText(user?.noTelpon)
 
         }
+
+        //binding.buttonSave.visibility = View.GONE
+        binding.buttonEdit.setOnClickListener{
+            val moveEdit = Intent(activity, EditActivity::class.java)
+            startActivity(moveEdit)
+            activity?.finish()
+        }
+
     }
+
 
 //    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 //        super.onViewCreated(view, savedInstanceState)

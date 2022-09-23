@@ -21,10 +21,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var inputusername: TextInputEditText
     private lateinit var inputpassword: TextInputEditText
     private lateinit var mainLayout: ConstraintLayout
-
-    var sr = "login"
-    var id = "idKey"
-    var pw = "myPref"
     var sharedPreferences : SharedPreferences? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,8 +35,9 @@ class MainActivity : AppCompatActivity() {
         inputusername = findViewById(R.id.inputTextUsername)
         inputpassword = findViewById(R.id.inputTextPassword)
         mainLayout = findViewById(R.id.mainLayout)
-
-        sharedPreferences = getSharedPreferences(pw, Context.MODE_PRIVATE)
+        var key = "idKey"
+        var pref = "myPref"
+        sharedPreferences = getSharedPreferences(pref, Context.MODE_PRIVATE)
 
         btnSignUp.setOnClickListener {
             val moveSignUp = Intent(this, SignUp::class.java)
@@ -64,16 +61,12 @@ class MainActivity : AppCompatActivity() {
 
             CoroutineScope(Dispatchers.IO).launch {
                 if (!username.isEmpty() && !password.isEmpty()) {
-                    val users = db.userDao().getUsers()
-
-                    for (i in users) {
-                        if (username == i.username && password == i.password) {
+                    val user = db.userDao().getUsers()
+                    for (i in user) {
+                        if (username == i.username) {
                             val editor: SharedPreferences.Editor = sharedPreferences!!.edit()
-                            editor.putInt(id, i.id)
+                            editor.putInt(key, i.id)
                             editor.apply()
-                            editor.putString(pw, i.password)
-                            editor.apply()
-                            checkLogin = true
                         }
                     }
 
@@ -94,7 +87,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    inner class NoteViewHolder( val view: View) : RecyclerView.ViewHolder(view)
+//    inner class NoteViewHolder( val view: View) : RecyclerView.ViewHolder(view)
 
 //    override fun onBindViewHolder(holder: NoteViewHolder, position: Int){
 //        val note = notes[position]

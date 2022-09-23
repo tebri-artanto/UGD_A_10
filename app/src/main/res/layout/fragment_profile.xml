@@ -22,8 +22,7 @@
             <RelativeLayout
                 android:id="@+id/layout_head"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:background="@color/coklat_muda">
+                android:layout_height="270dp">
 
                 <RelativeLayout
                     android:id="@+id/RL_imageView"
@@ -61,7 +60,7 @@
                     android:fontFamily="@font/poppinsbold"
                     android:hint="Test Nama"
                     android:textAlignment="center"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/teal_700"
                     android:textSize="25dp" />
             </RelativeLayout>
 
@@ -69,7 +68,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="285dp"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginBottom="15dp"
                 android:background="@drawable/et_round_biasa"
@@ -105,7 +103,7 @@
                 </RelativeLayout>
 
                 <View
-                    android:id="@+id/divider_name"
+                    android:id="@+id/divider1"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_below="@id/RL_name"
@@ -115,7 +113,7 @@
                     android:id="@+id/RL_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/divider_name"
+                    android:layout_below="@id/divider1"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp">
 
@@ -142,7 +140,7 @@
                 </RelativeLayout>
 
                 <View
-                    android:id="@+id/divider_email"
+                    android:id="@+id/divider2"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_below="@id/RL_email"
@@ -152,7 +150,7 @@
                     android:id="@+id/RL_dob"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/divider_email"
+                    android:layout_below="@id/divider2"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp">
 
@@ -179,17 +177,16 @@
                 </RelativeLayout>
 
                 <View
-                    android:id="@+id/divider_dob"
+                    android:id="@+id/divider3"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_below="@id/RL_dob"
                     android:background="@android:color/darker_gray" />
 
                 <RelativeLayout
-                    android:id="@+id/RL_gender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/divider_dob"
+                    android:layout_below="@id/divider3"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp">
 
@@ -221,7 +218,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button_create"
+        android:id="@+id/button_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/coklat_muda"
@@ -230,9 +227,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="600dp"
+        android:layout_marginTop="560dp"
         android:layout_marginStart="150dp"
         />
+
+
 
 
 </FrameLayout>
