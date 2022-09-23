@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 
 class EditActivity : AppCompatActivity() {
 
-<<<<<<< Updated upstream
+
     val db by lazy { PariwisataDB(this) }
     private var noteId: Int = 0
 
@@ -83,7 +83,7 @@ class EditActivity : AppCompatActivity() {
         onBackPressed()
         return super.onSupportNavigateUp()
     }
-=======
+
 //    val db by lazy { PariwisataDB(this) }
 //    private var noteId: Int = 0
 //
@@ -149,5 +149,5 @@ class EditActivity : AppCompatActivity() {
 //        onBackPressed()
 //        return super.onSupportNavigateUp()
 //    }
->>>>>>> Stashed changes
+
 }

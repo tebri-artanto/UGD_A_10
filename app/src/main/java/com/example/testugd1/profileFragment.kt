@@ -26,7 +26,7 @@ import kotlinx.coroutines.withContext
 class profileFragment : Fragment() {
 
 
-    val db by lazy {activity?.let { UserDB(it) }}
+    //val db by lazy {activity?.let { UserDB(it) }}
     private val id = "idKey"
     private val mypref= "myPref"
 
@@ -55,16 +55,16 @@ class profileFragment : Fragment() {
         // get session
 
 
-        CoroutineScope(Dispatchers.IO).launch {
-            val user = db?.userDao()?.getUser(id)?.get(0)
-
-                binding.textViewNama.setText(user?.username)
-                binding.textViewUsername.setText(user?.username)
-                binding.textViewEmail.setText(user?.email)
-                binding.textViewBirtdate.setText(user?.tanggalLahir)
-                binding.textViewPhone.setText(user?.noTelpon)
-
-        }
+//        CoroutineScope(Dispatchers.IO).launch {
+//            val user = db?.userDao()?.getUser(id)?.get(0)
+//
+//                binding.textViewNama.setText(user?.username)
+//                binding.textViewUsername.setText(user?.username)
+//                binding.textViewEmail.setText(user?.email)
+//                binding.textViewBirtdate.setText(user?.tanggalLahir)
+//                binding.textViewPhone.setText(user?.noTelpon)
+//
+//        }
     }
 
 //    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
