@@ -1,38 +1,29 @@
 package com.example.testugd1
 
-import android.R
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.testugd1.Entity.TempatPariwisata
-import com.example.testugd1.databinding.ActivitySignUpBinding
 import com.example.testugd1.databinding.FragmentProfileBinding
 import com.example.testugd1.room.UserDB
-import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 class profileFragment : Fragment() {
 
 
-    //val db by lazy {activity?.let { UserDB(it) }}
+    val db by lazy {activity?.let { UserDB(it) }}
     private val id = "idKey"
     private val mypref= "myPref"
 
 
     private lateinit var userDB: UserDB
-    lateinit var profileAdapter: ProfileAdapter
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
     var sharedPreferences : SharedPreferences? = null
@@ -55,16 +46,16 @@ class profileFragment : Fragment() {
         // get session
 
 
-//        CoroutineScope(Dispatchers.IO).launch {
-//            val user = db?.userDao()?.getUser(id)?.get(0)
-//
-//                binding.textViewNama.setText(user?.username)
-//                binding.textViewUsername.setText(user?.username)
-//                binding.textViewEmail.setText(user?.email)
-//                binding.textViewBirtdate.setText(user?.tanggalLahir)
-//                binding.textViewPhone.setText(user?.noTelpon)
-//
-//        }
+        CoroutineScope(Dispatchers.IO).launch {
+            val user = db?.userDao()?.getUser(id)?.get(0)
+
+                binding.textViewNama.setText(user?.username)
+                binding.textViewUsername.setText(user?.username)
+                binding.textViewEmail.setText(user?.email)
+                binding.textViewBirtdate.setText(user?.tanggalLahir)
+                binding.textViewPhone.setText(user?.noTelpon)
+
+        }
     }
 
 //    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -22,9 +22,6 @@
             android:exported="false" />
 
         <activity
-            android:name=".ProfileAdapter"
-            android:exported="false" />
-        <activity
             android:name=".Splash"
             android:exported="true">
             <intent-filter>

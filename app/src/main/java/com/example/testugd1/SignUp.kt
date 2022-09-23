@@ -16,78 +16,18 @@ class SignUp : AppCompatActivity() {
     //val binding: ActivitySignUpBinding
     //private lateinit var usersDb: UserDB
     val db by lazy { UserDB(this) }
-    private var userId: Int = 0
     private lateinit var binding: ActivitySignUpBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setupListener(binding)
-
-
-
-//        val btnSignUp2: Button = binding.btnSignUp
-//
-//
-//
-//        btnSignUp2.setOnClickListener(View.OnClickListener {
-//            var checkSignUp = false
-//
-//            val mBundle = Bundle()
-//            val username: String = binding.inputLayoutUsername.toString()
-//            val password: String = binding.inputLayoutPassword.toString()
-//            val email: String = binding.inputLayoutEmail.toString()
-//            val tanggalLahir: String = binding.inputLayoutTanggalLahir.toString()
-//            val noTelpon: String = binding.inputLayoutNoTelpon.toString()
-//
-//
-//            if (username.isEmpty()){
-//                binding.inputLayoutUsername.setError("Username must be filled with text")
-//                checkSignUp = false
-//            }
-//
-//            if (password.isEmpty()){
-//                binding.inputLayoutPassword.setError("Password must be filled with text")
-//                checkSignUp = false
-//            }
-//
-//            if (email.isEmpty()){
-//                binding.inputLayoutEmail.setError("Email must be filled with text")
-//                checkSignUp = false
-//            }
-//
-//            if (tanggalLahir.isEmpty()){
-//                binding.inputLayoutTanggalLahir.setError("Tanggal Lahir must be filled with text")
-//                checkSignUp = false
-//                }
-//
-//            if (noTelpon.isEmpty()){
-//                binding.inputLayoutNoTelpon.setError("No Telpon must be filled with text")
-//                checkSignUp = false
-//            }
-//            if (username.isNotEmpty() && password.isNotEmpty() && email.isNotEmpty() && tanggalLahir.isNotEmpty() && noTelpon.isNotEmpty()) checkSignUp = true
-//
-//            if (!checkSignUp) return@OnClickListener
-//            if(checkSignUp == true){
-//                mBundle.putString("username", username)
-//                mBundle.putString("password", password)
-//                val moveHome = Intent(this@SignUp, MainActivity::class.java)
-//                moveHome.putExtras(mBundle)
-//                startActivity(moveHome)
-//            }
-//
-//        })
-
-    }
-
-    private fun setupListener(binding: ActivitySignUpBinding) {
-        var checkSignUp = false
-
-        val mBundle = Bundle()
 
 
         binding.btnSignUp.setOnClickListener(View.OnClickListener {
+            var checkSignUp = false
+            val mBundle = Bundle()
             val username: String = binding.inputLayoutUsername.getEditText()?.getText().toString()
             val password: String = binding.inputLayoutPassword.getEditText()?.getText().toString()
             val email: String = binding.inputLayoutEmail.getEditText()?.getText().toString()
@@ -126,14 +66,13 @@ class SignUp : AppCompatActivity() {
                 CoroutineScope(Dispatchers.IO).launch {
                     db.userDao().addUser(
                         User(
-                            0,
-                            username, password, email, tanggalLahir, noTelpon
+                            0, username, password, email, tanggalLahir, noTelpon
                         )
                     )
                     finish()
                 }
 
-                val moveHome = Intent(this@SignUp, MainActivity::class.java)
+                val moveHome = Intent(this, MainActivity::class.java)
                 moveHome.putExtras(mBundle)
                 startActivity(moveHome)
             }
