@@ -3,9 +3,9 @@ package com.example.testugd1
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class NoteAdapter : AppCompatActivity() {
+class PariwisataAdapater : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_note_adapter)
+        setContentView(R.layout.activity_pariwisata_adapter)
     }
 }
