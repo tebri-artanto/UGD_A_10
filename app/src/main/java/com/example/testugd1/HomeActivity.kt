@@ -1,5 +1,6 @@
 package com.example.testugd1
 
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,6 +9,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : AppCompatActivity() {
     lateinit var navigation: BottomNavigationView
+    private lateinit var sharedPref: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,5 +33,9 @@ class HomeActivity : AppCompatActivity() {
         val transaction = manager.beginTransaction()
         transaction.replace(R.id.frame_layout, fragment)
         transaction.commit()
+    }
+
+    fun getSession(): SharedPreferences {
+        return sharedPref
     }
 }

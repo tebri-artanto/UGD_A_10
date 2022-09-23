@@ -24,7 +24,7 @@ abstract class PariwisataDB: RoomDatabase() {
             Room.databaseBuilder(
                 context.applicationContext,
                 PariwisataDB::class.java,
-                "userPariwisata.db"
+                "TempatPariwisata.db"
             ).build()
     }
 }

@@ -27,11 +27,11 @@ class ProfileAdapter (private val users: ArrayList<User>, private val listener: 
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        val user = users[position]
-        holder.view.textView_username.text = user.username
-        holder.view.textView_email.text = user.email
-        holder.view.textView_birtdate.text = user.tanggalLahir
-        holder.view.textView_phone.text = user.noTelpon
+//        val user = users[position]
+//        holder.view.textView_username.text = user.username
+//        holder.view.textView_email.text = user.email
+//        holder.view.textView_birtdate.text = user.tanggalLahir
+//        holder.view.textView_phone.text = user.noTelpon
 
     }
 

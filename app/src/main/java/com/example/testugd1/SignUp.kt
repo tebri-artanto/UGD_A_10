@@ -17,11 +17,11 @@ class SignUp : AppCompatActivity() {
     //private lateinit var usersDb: UserDB
     val db by lazy { UserDB(this) }
     private var userId: Int = 0
-
+    private lateinit var binding: ActivitySignUpBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding = ActivitySignUpBinding.inflate(layoutInflater)
+        binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupListener(binding)
 
@@ -88,7 +88,7 @@ class SignUp : AppCompatActivity() {
 
 
         binding.btnSignUp.setOnClickListener(View.OnClickListener {
-            val username: String = binding?.inputLayoutUsername?.getEditText()?.getText().toString()
+            val username: String = binding.inputLayoutUsername.getEditText()?.getText().toString()
             val password: String = binding.inputLayoutPassword.getEditText()?.getText().toString()
             val email: String = binding.inputLayoutEmail.getEditText()?.getText().toString()
             val tanggalLahir: String = binding.inputLayoutTanggalLahir.getEditText()?.getText().toString()
