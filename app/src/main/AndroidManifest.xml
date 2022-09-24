@@ -16,9 +16,9 @@
         <activity
             android:name=".EditProfile"
             android:exported="false" />
-        <activity
-            android:name=".homeMenu.PariwisataAdapater"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".homeMenu.PariwisataAdapater"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".EditActivity"
             android:exported="false" />
@@ -46,6 +46,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service
+            android:name=".MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+<!--        <receiver android:name=".NotificationReceiver"/>-->
     </application>
 
 </manifest>
