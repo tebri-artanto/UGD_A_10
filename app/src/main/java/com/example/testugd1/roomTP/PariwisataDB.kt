@@ -11,6 +11,7 @@ import androidx.room.RoomDatabase
 )
 abstract class PariwisataDB: RoomDatabase() {
     abstract fun pariwisataDao() : PariwisataDao
+
     companion object {
         @Volatile private var instance : PariwisataDB? = null
         private val LOCK = Any()
