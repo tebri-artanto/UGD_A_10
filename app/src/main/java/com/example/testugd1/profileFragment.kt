@@ -39,7 +39,7 @@ class profileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val layoutManager = LinearLayoutManager(context)
         sharedPreferences = activity?.getSharedPreferences(mypref, Context.MODE_PRIVATE)
-        val id = sharedPreferences!!.getInt(id, 0)
+        val id = sharedPreferences!!.getString(id,"")!!.toInt()
 
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -54,7 +54,7 @@ class profileFragment : Fragment() {
 
         //binding.buttonSave.visibility = View.GONE
         binding.buttonEdit.setOnClickListener{
-            val moveEdit = Intent(activity, EditActivity::class.java)
+            val moveEdit = Intent(activity, EditProfile::class.java)
             startActivity(moveEdit)
             activity?.finish()
         }

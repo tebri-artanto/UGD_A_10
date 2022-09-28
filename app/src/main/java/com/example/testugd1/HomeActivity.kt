@@ -36,7 +36,5 @@ class HomeActivity : AppCompatActivity() {
         transaction.commit()
     }
 
-    fun getSession(): SharedPreferences {
-        return sharedPref
-    }
+
 }
