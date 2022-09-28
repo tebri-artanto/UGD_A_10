@@ -50,8 +50,8 @@ class EditActivity : AppCompatActivity() {
         binding.buttonSave.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 db.pariwisataDao().addPariwisata(
-                    Pariwisata(0, binding.editTitle.text.toString(), binding.editNote.text.toString(),
-                        binding.editNote.text.toString(), binding.editNote.text.toString())
+                    Pariwisata(0, binding.editNama.text.toString(), binding.editLokasi.text.toString(),
+                        binding.editHarga.text.toString(), binding.editTipe.text.toString())
                 )
                 finish()
             }
@@ -60,8 +60,8 @@ class EditActivity : AppCompatActivity() {
         binding.buttonUpdate.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 db.pariwisataDao().updatePariwisata(
-                    Pariwisata(noteId, binding.editTitle.text.toString(), binding.editNote.text.toString(),
-                        binding.editNote.text.toString(), binding.editNote.text.toString())
+                    Pariwisata(noteId, binding.editNama.text.toString(), binding.editLokasi.text.toString(),
+                        binding.editHarga.text.toString(), binding.editTipe.text.toString())
                 )
                 finish()
             }
@@ -72,10 +72,10 @@ class EditActivity : AppCompatActivity() {
         noteId = intent.getIntExtra("intent_id", 0)
         CoroutineScope(Dispatchers.IO).launch {
             val notes = db.pariwisataDao().getPariwisata(noteId)[0]
-            binding.editTitle.setText(notes.nama)
-            binding.editNote.setText(notes.lokasi)
-            binding.editNote.setText(notes.harga)
-            binding.editNote.setText(notes.tipe)
+            binding.editNama.setText(notes.nama)
+            binding.editLokasi.setText(notes.lokasi)
+            binding.editHarga.setText(notes.harga)
+            binding.editTipe.setText(notes.tipe)
         }
     }
 

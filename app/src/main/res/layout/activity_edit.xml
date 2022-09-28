@@ -32,7 +32,7 @@
         android:background="@drawable/edittextstyle"/>
 
     <EditText
-        android:id="@+id/edi_lokasi"
+        android:id="@+id/edit_lokasi"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Lokasi Pariwisata"

@@ -21,7 +21,7 @@ class HomeActivity : AppCompatActivity() {
         navigation.setOnItemSelectedListener{ item->
             when(item.itemId){
                 R.id.Search -> changeFragment(searchFragment())
-                R.id.Home -> changeFragment(homeFragment())
+                R.id.Home -> changeFragment(Fragment())
                 R.id.Profile -> changeFragment(profileFragment())
             }
             true
