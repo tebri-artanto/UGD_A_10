@@ -2,10 +2,7 @@ package com.example.testugd1.homeMenu
 
 import android.content.Context
 import android.os.Bundle
-<<<<<<< Updated upstream
-=======
 import android.content.Intent
->>>>>>> Stashed changes
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.content.SharedPreferences
 import android.util.Log
@@ -73,23 +70,23 @@ class homeFragment : Fragment() {
 //    }
 
     private fun setupRecyclerView() {
-        pariwisataAdapter= PariwisataAdapter(arrayListOf(), object :
-            PariwisataAdapter.OnAdapterListener{
-            override fun onClick(pariwisata: Pariwisata) {
-                intentEdit(pariwisata.id, Constant.TYPE_READ)
-            }
-
-            override fun onUpdate(pariwisata: Pariwisata) {
-                intentEdit(pariwisata.id, Constant.TYPE_UPDATE)
-            }
-
-            override fun onDelete(pariwisata: Pariwisata) {
-                deleteDialog(pariwisata)
-            }
-        })
-        list_note.apply {
-//            layoutManager = LinearLayoutManager(applicationContex)
-            adapter = pariwisataAdapter
+////        pariwisataAdapter= PariwisataAdapter(arrayListOf(), object :
+//            PariwisataAdapter.OnAdapterListener{
+//            override fun onClick(pariwisata: Pariwisata) {
+////                intentEdit(pariwisata.id, Constant.TYPE_READ)
+////            }
+////
+////            override fun onUpdate(pariwisata: Pariwisata) {
+////                intentEdit(pariwisata.id, Constant.TYPE_UPDATE)
+////            }
+////
+////            override fun onDelete(pariwisata: Pariwisata) {
+////                deleteDialog(pariwisata)
+//            }
+//        })
+//        list_note.apply {
+////            layoutManager = LinearLayoutManager(applicationContex)
+//            adapter = pariwisataAdapter
         }
     }
 
@@ -114,10 +111,10 @@ class homeFragment : Fragment() {
 //        alertDialog.show()
     }
 
-    override fun onStart() {
-        super.onStart()
-        loadData()
-    }
+//    override fun onStart() {
+//        super.onStart()
+//        loadData()
+//    }
 
     fun loadData() {
 //        CoroutineScope(Dispatchers.IO).launch {
@@ -129,17 +126,17 @@ class homeFragment : Fragment() {
 //        }
     }
 
-    fun setupListener() {
-        button_create.setOnClickListener{
-            intentEdit(0,Constant.TYPE_CREATE)
-        }
-    }
+//    fun setupListener() {
+//        button_create.setOnClickListener{
+//            intentEdit(0,Constant.TYPE_CREATE)
+//        }
+//    }
 
-    fun intentEdit(noteId : Int, intentType: Int) {
-        startActivity(
-            Intent(applicationCo, EditActivity::class.java)
-                .putExtra("intent_id", noteId)
-                .putExtra("intent_type", intentType)
-        )
-    }
-}
+//    fun intentEdit(noteId : Int, intentType: Int) {
+//        startActivity(
+//            Intent(applicationCo, EditActivity::class.java)
+//                .putExtra("intent_id", noteId)
+//                .putExtra("intent_type", intentType)
+//        )
+//    }
+//}

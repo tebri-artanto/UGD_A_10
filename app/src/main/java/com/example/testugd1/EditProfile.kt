@@ -67,8 +67,6 @@ class EditProfile : AppCompatActivity() {
 
         binding.buttonSave.setOnClickListener() {
             CoroutineScope(Dispatchers.IO).launch {
-                val loggedUasers: List<User> = db.userDao().getUser(id)
-                val logged = loggedUasers[0]
                 db.userDao().updateUser(
                     User(
                         id,
@@ -82,7 +80,7 @@ class EditProfile : AppCompatActivity() {
             }
             finish()
             //bikinnya disini yang nanti notifnya bakal muncul
-
+            sendNotification1()
             val intent = Intent(this, HomeActivity::class.java)
             val bundle = Bundle()
             bundle.putString("key", "filled")
@@ -116,7 +114,7 @@ class EditProfile : AppCompatActivity() {
         }
         val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
 
-        val broadcastIntent: Intent = Intent(this, NotificationReceiver::class.java)
+        val broadcastIntent: Intent = Intent(this, HomeActivity::class.java)
         broadcastIntent.putExtra("toastMessage", binding?.buttonSave?.text.toString())
         val actionIntent = PendingIntent.getBroadcast(this, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
@@ -126,7 +124,7 @@ class EditProfile : AppCompatActivity() {
             .setContentText("Profile Change Successful")
             //bigtext
             .setStyle(NotificationCompat.BigTextStyle()
-                .bigText("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA...........")
+                .bigText("Selamat anda berhasil mengedit profil anda ")
             )
             .setCategory(NotificationCompat.CATEGORY_MESSAGE)
             .setColor(Color.BLUE)
