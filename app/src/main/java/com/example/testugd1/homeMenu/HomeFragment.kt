@@ -2,6 +2,10 @@ package com.example.testugd1.homeMenu
 
 import android.content.Context
 import android.os.Bundle
+<<<<<<< Updated upstream
+=======
+import android.content.Intent
+>>>>>>> Stashed changes
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.content.SharedPreferences
 import android.util.Log
@@ -23,7 +27,7 @@ import kotlinx.coroutines.withContext
 
 class homeFragment : Fragment() {
 
-    val db by lazy { PariwisataDB(this) }
+    val db by lazy { activity?.let { PariwisataDB(it) } }
     lateinit var pariwisataAdapter: PariwisataAdapter
     private val id = "idKey"
     private val mypref= "myPref"
@@ -132,10 +136,10 @@ class homeFragment : Fragment() {
     }
 
     fun intentEdit(noteId : Int, intentType: Int) {
-//        startActivity(
-////            Intent(applicationContex, EditActivity::class.java)
-////                .putExtra("intent_id", noteId)
-////                .putExtra("intent_type", intentType)
-//        )
+        startActivity(
+            Intent(applicationCo, EditActivity::class.java)
+                .putExtra("intent_id", noteId)
+                .putExtra("intent_type", intentType)
+        )
     }
 }
