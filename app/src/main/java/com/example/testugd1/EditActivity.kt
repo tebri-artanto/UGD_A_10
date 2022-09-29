@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 class EditActivity : AppCompatActivity() {
 
 
-    val db by lazy { PariwisataDB(this) }
+//    val db by lazy { PariwisataDB(this) }
     private var noteId: Int = 0
 
     private lateinit var binding : ActivityEditBinding
@@ -49,20 +49,20 @@ class EditActivity : AppCompatActivity() {
     private fun setupListener() {
         binding.buttonSave.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
-                db.pariwisataDao().addPariwisata(
-                    Pariwisata(0, binding.editNama.text.toString(), binding.editLokasi.text.toString(),
-                        binding.editHarga.text.toString(), binding.editTipe.text.toString())
-                )
+//                db.pariwisataDao().addPariwisata(
+//                    Pariwisata(0, binding.editNama.text.toString(), binding.editLokasi.text.toString(),
+//                        binding.editHarga.text.toString(), binding.editTipe.text.toString())
+//                )
                 finish()
             }
         }
 
         binding.buttonUpdate.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
-                db.pariwisataDao().updatePariwisata(
-                    Pariwisata(noteId, binding.editNama.text.toString(), binding.editLokasi.text.toString(),
-                        binding.editHarga.text.toString(), binding.editTipe.text.toString())
-                )
+//                db.pariwisataDao().updatePariwisata(
+//                    Pariwisata(noteId, binding.editNama.text.toString(), binding.editLokasi.text.toString(),
+//                        binding.editHarga.text.toString(), binding.editTipe.text.toString())
+//                )
                 finish()
             }
         }
@@ -70,13 +70,13 @@ class EditActivity : AppCompatActivity() {
 
     fun getNote(){
         noteId = intent.getIntExtra("intent_id", 0)
-        CoroutineScope(Dispatchers.IO).launch {
-            val notes = db.pariwisataDao().getPariwisata(noteId)[0]
-            binding.editNama.setText(notes.nama)
-            binding.editLokasi.setText(notes.lokasi)
-            binding.editHarga.setText(notes.harga)
-            binding.editTipe.setText(notes.tipe)
-        }
+//        CoroutineScope(Dispatchers.IO).launch {
+//            val notes = db.pariwisataDao().getPariwisata(noteId)[0]
+//            binding.editNama.setText(notes.nama)
+//            binding.editLokasi.setText(notes.lokasi)
+//            binding.editHarga.setText(notes.harga)
+//            binding.editTipe.setText(notes.tipe)
+//        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -19,9 +19,9 @@ abstract class PariwisataDB: RoomDatabase() {
         private val LOCK = Any()
         operator fun invoke(context: homeFragment) = instance ?:
         synchronized(LOCK){
-            instance ?: buildDatabase(context).also {
-                instance = it
-            }
+//            instance ?: buildDatabase(context).also {
+//                instance = it
+//            }
         }
         private fun buildDatabase(context: Context) =
             Room.databaseBuilder(

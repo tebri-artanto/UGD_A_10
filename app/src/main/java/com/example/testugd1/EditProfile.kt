@@ -1,19 +1,27 @@
 package com.example.testugd1
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.testugd1.databinding.ActivityEditProfileBinding
 import com.example.testugd1.databinding.ActivitySignUpBinding
 import com.example.testugd1.databinding.FragmentProfileBinding
 import com.example.testugd1.room.User
 import com.example.testugd1.room.UserDB
+import kotlinx.android.synthetic.main.activity_edit_profile.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,6 +34,8 @@ class EditProfile : AppCompatActivity() {
     private val mypref= "myPref"
 
     private lateinit var binding: ActivityEditProfileBinding
+    private var CHANNEL_ID_1 = "channel_notiification_01"
+    private var notificationId1 = 101
     var sharedPreferences: SharedPreferences? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,10 +43,15 @@ class EditProfile : AppCompatActivity() {
         binding = ActivityEditProfileBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        createNotificationChannel()
+
+        binding!!.buttonSave.setOnClickListener{
+            sendNotification1()
+        }
+
         sharedPreferences = getSharedPreferences(mypref, Context.MODE_PRIVATE)
         val id = sharedPreferences!!.getString(key, "")!!.toInt()
-
-        //createNotificationChannel()
 
         CoroutineScope(Dispatchers.IO).launch {
             val user = db?.userDao()?.getUser(id)?.get(0)
@@ -67,7 +82,7 @@ class EditProfile : AppCompatActivity() {
             }
             finish()
             //bikinnya disini yang nanti notifnya bakal muncul
-            //sendNotification1()
+
             val intent = Intent(this, HomeActivity::class.java)
             val bundle = Bundle()
             bundle.putString("key", "filled")
@@ -77,6 +92,56 @@ class EditProfile : AppCompatActivity() {
         }
 
     }
+
+    //membuat notif
+    private fun createNotificationChannel(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            val name = "Notification Title"
+            val descriptionText = "Notification Description"
+
+            val channel1 = NotificationChannel(CHANNEL_ID_1, name, NotificationManager.IMPORTANCE_DEFAULT).apply {
+                description = descriptionText
+            }
+
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel1)
+        }
+    }
+
+    private fun sendNotification1(){
+
+        val intent: Intent = Intent(this, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+
+        val broadcastIntent: Intent = Intent(this, NotificationReceiver::class.java)
+        broadcastIntent.putExtra("toastMessage", binding?.buttonSave?.text.toString())
+        val actionIntent = PendingIntent.getBroadcast(this, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+
+        val builder = NotificationCompat.Builder(this, CHANNEL_ID_1)
+            .setSmallIcon(R.drawable.ic_notifications_24)
+            .setContentTitle(binding?.inputEmail?.text.toString())
+            .setContentText("Profile Change Successful")
+            //bigtext
+            .setStyle(NotificationCompat.BigTextStyle()
+                .bigText("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA...........")
+            )
+            .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+            .setColor(Color.BLUE)
+            .setAutoCancel(true)
+            .setOnlyAlertOnce(true)
+            .setContentIntent(pendingIntent)
+            .addAction(R.mipmap.ic_launcher, "Toast", actionIntent)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+        with(NotificationManagerCompat.from(this)){
+            notify(notificationId1, builder.build())
+        }
+    }
+
+
 //        binding.buttonSave.setOnClickListener(View.OnClickListener {
 //            var checkSignUp = false
 //            val mBundle = Bundle()
