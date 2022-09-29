@@ -1,14 +1,21 @@
 package com.example.testugd1.homeMenu
 
+import android.content.Context
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.testugd1.R
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.testugd1.EditActivity
+import com.example.testugd1.databinding.FragmentHomeBinding
+import com.example.testugd1.databinding.FragmentProfileBinding
 import com.example.testugd1.room.Constant
 import com.example.testugd1.roomTP.Pariwisata
 import com.example.testugd1.roomTP.PariwisataDB
@@ -20,34 +27,55 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class homeFragment : AppCompatActivity() {
+class homeFragment : Fragment() {
+
+    val db by lazy { PariwisataDB(this) }
+    lateinit var pariwisataAdapter: PariwisataAdapter
+    private val id = "idKey"
+    private val mypref= "myPref"
+
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+    var sharedPreferences : SharedPreferences? = null
 //    override fun onCreateView(
 //        inflater: LayoutInflater, container: ViewGroup?,
 //        savedInstanceState: Bundle?
 //    ): View? {
 //        return inflater.inflate(R.layout.fragment_home, container, false)
+//        setupListener()
+//        setupRecyclerView()
 //    }
 
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        val layoutManager = LinearLayoutManager(context)
-////        val adapter : rvTempatPariwisata = rvTempatPariwisata(TempatPariwisata.litsOfKelas)
-////        val rvPariwisata : RecyclerView = view.findViewById(R.id.rv_tempat_pariwisata)
-//        rvPariwisata.layoutManager = layoutManager
-//        rvPariwisata.adapter = adapter
-//    }}
-    val db by lazy { PariwisataDB(this) }
-    lateinit var noteAdapter: PariwisataAdapter
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_home)
-        setupListener()
-        setupRecycleView()
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        val view = binding.root
+        return view
     }
 
-    private fun setupRecycleView() {
-        PariwisataAdapter= PariwisataAdapter(arrayListOf(), object :
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val layoutManager = LinearLayoutManager(context)
+        sharedPreferences = activity?.getSharedPreferences(mypref, Context.MODE_PRIVATE)
+        val id = sharedPreferences!!.getString(id,"")!!.toInt()
+//        val adapter : rvTempatPariwisata = rvTempatPariwisata(TempatPariwisata.litsOfKelas)
+//        val rvPariwisata : RecyclerView = view.findViewById(R.id.rv_tempat_pariwisata)
+//        rvPariwisata.layoutManager = layoutManager
+//        rvPariwisata.adapter = adapter
+    }
+
+
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        setContentView(R.layout.fragment_home)
+//        setupListener()
+//        setupRecycleView()
+//    }
+
+    private fun setupRecyclerView() {
+        pariwisataAdapter= PariwisataAdapter(arrayListOf(), object :
             PariwisataAdapter.OnAdapterListener{
             override fun onClick(pariwisata: Pariwisata) {
                 intentEdit(pariwisata.id, Constant.TYPE_READ)
@@ -62,30 +90,30 @@ class homeFragment : AppCompatActivity() {
             }
         })
         list_note.apply {
-            layoutManager = LinearLayoutManager(applicationContext)
-            adapter = PariwisataAdapter
+//            layoutManager = LinearLayoutManager(applicationContex)
+            adapter = pariwisataAdapter
         }
     }
 
     private fun deleteDialog(pariwisata: Pariwisata){
-        val alertDialog = AlertDialog.Builder(this)
-        alertDialog.apply {
-            setTitle("Confirmation")
-            setMessage("Are You Sure to delete this data From${pariwisata.nama}?")
-            setNegativeButton("Cancel", DialogInterface.OnClickListener
-            { dialogInterface, i ->
-                dialogInterface.dismiss()
-            })
-            setPositiveButton("Delete", DialogInterface.OnClickListener
-            { dialogInterface, i ->
-                dialogInterface.dismiss()
-                CoroutineScope(Dispatchers.IO).launch {
-                    db.pariwisataDao().deletePariwisata(pariwisata)
-                    loadData()
-                }
-            })
-        }
-        alertDialog.show()
+        //val alertDialog = AlertDialog.Builder(this)
+//        alertDialog.apply {
+//            setTitle("Confirmation")
+//            setMessage("Are You Sure to delete this data From${pariwisata.nama}?")
+//            setNegativeButton("Cancel", DialogInterface.OnClickListener
+//            { dialogInterface, i ->
+//                dialogInterface.dismiss()
+//            })
+//            setPositiveButton("Delete", DialogInterface.OnClickListener
+//            { dialogInterface, i ->
+//                dialogInterface.dismiss()
+//                CoroutineScope(Dispatchers.IO).launch {
+//                    db.pariwisataDao().deletePariwisata(pariwisata)
+//                    loadData()
+//                }
+//            })
+//        }
+//        alertDialog.show()
     }
 
     override fun onStart() {
@@ -95,10 +123,10 @@ class homeFragment : AppCompatActivity() {
 
     fun loadData() {
         CoroutineScope(Dispatchers.IO).launch {
-            val Pariwisata = db.pariwisataDao().getPariwisata()
-            Log.d("MainActivity","dbResponse: $Pariwisata")
+            val pariwisata = db.pariwisataDao().getPariwisata()
+            Log.d("MainActivity","dbResponse: $pariwisata")
             withContext(Dispatchers.Main){
-                PariwisataAdapter.(Pariwisata)
+                pariwisataAdapter.setData(pariwisata)
             }
         }
     }
@@ -110,10 +138,10 @@ class homeFragment : AppCompatActivity() {
     }
 
     fun intentEdit(noteId : Int, intentType: Int) {
-        startActivity(
-            Intent(applicationContext, EditActivity::class.java)
-                .putExtra("intent_id", noteId)
-                .putExtra("intent_type", intentType)
-        )
+//        startActivity(
+////            Intent(applicationContex, EditActivity::class.java)
+////                .putExtra("intent_id", noteId)
+////                .putExtra("intent_type", intentType)
+//        )
     }
 }

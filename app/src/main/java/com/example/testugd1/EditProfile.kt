@@ -34,45 +34,49 @@ class EditProfile : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         sharedPreferences = getSharedPreferences(mypref, Context.MODE_PRIVATE)
-        val id = sharedPreferences!!.getString(key,"")!!.toInt()
+        val id = sharedPreferences!!.getString(key, "")!!.toInt()
 
+        //createNotificationChannel()
 
         CoroutineScope(Dispatchers.IO).launch {
             val user = db?.userDao()?.getUser(id)?.get(0)
             withContext(Dispatchers.Main) {
-            binding.inputUsername.setText(user?.username)
-            binding.inputPassword.setText(user?.password)
-            binding.inputEmail.setText(user?.email)
-            binding.inputTanggalLahir.setText(user?.tanggalLahir)
-            binding.inputNoTelp.setText(user?.noTelpon)
+                binding.inputUsername.setText(user?.username)
+                binding.inputPassword.setText(user?.password)
+                binding.inputEmail.setText(user?.email)
+                binding.inputTanggalLahir.setText(user?.tanggalLahir)
+                binding.inputNoTelp.setText(user?.noTelpon)
             }
 
         }
 
         binding.buttonSave.setOnClickListener() {
-                    CoroutineScope(Dispatchers.IO).launch {
-                        val loggedUasers : List<User> = db.userDao().getUser(id)
-                        val logged = loggedUasers[0]
-                        db.userDao().updateUser(
-                            User(
-                                id,
-                                binding.inputUsername.text.toString(),
-                                binding.inputEmail.text.toString(),
-                                binding.inputPassword.text.toString(),
-                                binding.inputTanggalLahir.text.toString(),
-                                binding.inputNoTelp.text.toString()
-                            )
-                        )
-                    }
-                    finish()
-                    val intent = Intent(this, HomeActivity::class.java)
-                    val bundle = Bundle()
-                    bundle.putString("key", "iniTerisi")
-                    intent.putExtra("keyBundle", bundle)
-                    startActivity(intent)
-
+            CoroutineScope(Dispatchers.IO).launch {
+                val loggedUasers: List<User> = db.userDao().getUser(id)
+                val logged = loggedUasers[0]
+                db.userDao().updateUser(
+                    User(
+                        id,
+                        binding.inputUsername.text.toString(),
+                        binding.inputEmail.text.toString(),
+                        binding.inputPassword.text.toString(),
+                        binding.inputTanggalLahir.text.toString(),
+                        binding.inputNoTelp.text.toString()
+                    )
+                )
+            }
+            finish()
+            //bikinnya disini yang nanti notifnya bakal muncul
+            //sendNotification1()
+            val intent = Intent(this, HomeActivity::class.java)
+            val bundle = Bundle()
+            bundle.putString("key", "filled")
+            intent.putExtra("keyBundle", bundle)
+            startActivity(intent)
 
         }
+
+    }
 //        binding.buttonSave.setOnClickListener(View.OnClickListener {
 //            var checkSignUp = false
 //            val mBundle = Bundle()
@@ -124,6 +128,5 @@ class EditProfile : AppCompatActivity() {
 //            }
 //
 //        })
-    }
 
 }

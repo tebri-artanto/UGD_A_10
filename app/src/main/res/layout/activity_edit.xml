@@ -8,7 +8,7 @@
     tools:context=".EditActivity">
 
     <TextView
-        android:id="@+id/tvSignUp"
+        android:id="@+id/tvPariwisata"
         android:textColor="@color/greenBtnColor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
         android:hint="Nama Pariwisata"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSignUp"
+        app:layout_constraintTop_toBottomOf="@+id/tvPariwisata"
         android:layout_marginTop="30dp"
         android:background="@drawable/edittextstyle"/>
 
@@ -50,7 +50,7 @@
         android:hint="Harga"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edi_lokasi"
+        app:layout_constraintTop_toBottomOf="@+id/edit_lokasi"
         android:layout_marginTop="10dp"
         android:gravity="top"
         android:background="@drawable/edittextstyle"/>
