@@ -20,39 +20,31 @@ import kotlinx.coroutines.launch
 
 class profileFragment : Fragment() {
 
-
     val db by lazy {activity?.let { UserDB(it) }}
-    private val id = "idKey"
+    private val key = "idKey"
     private val mypref= "myPref"
-
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
     var sharedPreferences : SharedPreferences? = null
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val layoutManager = LinearLayoutManager(context)
         sharedPreferences = activity?.getSharedPreferences(mypref, Context.MODE_PRIVATE)
-        val id = sharedPreferences!!.getString(id,"")!!.toInt()
-
 
         CoroutineScope(Dispatchers.IO).launch {
+            val id = sharedPreferences!!.getString(key,"")!!.toInt()
             val user = db?.userDao()?.getUser(id)?.get(0)
-                binding.textViewNama.setText(user?.username)
-                binding.textViewUsername.setText(user?.username)
-                binding.textViewEmail.setText(user?.email)
-                binding.textViewBirtdate.setText(user?.tanggalLahir)
-                binding.textViewPhone.setText(user?.noTelpon)
-
+            binding.textViewNama.setText(user?.username)
+            binding.textViewUsername.setText(user?.username)
+            binding.textViewEmail.setText(user?.email)
+            binding.textViewBirtdate.setText(user?.tanggalLahir)
+            binding.textViewPhone.setText(user?.noTelpon)
         }
-
-        //binding.buttonSave.visibility = View.GONE
         binding.buttonEdit.setOnClickListener{
             val moveEdit = Intent(activity, EditProfile::class.java)
             startActivity(moveEdit)
@@ -60,6 +52,37 @@ class profileFragment : Fragment() {
         }
 
     }
+
+    //    val db by lazy {activity?.let { UserDB(it) }}
+//    private val id = "idKey"
+//    private val mypref= "myPref"
+//
+//    private var _binding: FragmentProfileBinding? = null
+//    private val binding get() = _binding!!
+//    var sharedPreferences : SharedPreferences? = null
+//
+//    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+//        // Inflate the layout for this fragment
+//        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+//        return binding.root
+//    }
+//
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//        val layoutManager = LinearLayoutManager(context)
+//        sharedPreferences = activity?.getSharedPreferences(mypref, Context.MODE_PRIVATE)
+//        val id = sharedPreferences!!.getString(id,"")!!.toInt()
+//
+//
+//        CoroutineScope(Dispatchers.IO).launch {
+//            val user = db?.userDao()?.getUser(id)?.get(0)
+//                binding.textViewNama.setText(user?.username)
+//                binding.textViewUsername.setText(user?.username)
+//                binding.textViewEmail.setText(user?.email)
+//                binding.textViewBirtdate.setText(user?.tanggalLahir)
+//                binding.textViewPhone.setText(user?.noTelpon)
+//
+//        }
 
 
 //    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

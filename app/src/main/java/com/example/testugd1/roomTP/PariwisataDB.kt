@@ -5,8 +5,6 @@ import androidx.fragment.app.FragmentActivity
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.testugd1.EditActivity
-import com.example.testugd1.homeMenu.homeFragment
 
 @Database(
     entities = [Pariwisata::class],
@@ -20,9 +18,9 @@ abstract class PariwisataDB: RoomDatabase() {
         private val LOCK = Any()
         operator fun invoke(context: FragmentActivity) = instance ?:
         synchronized(LOCK){
-//            instance ?: buildDatabase(context).also {
-//                instance = it
-//            }
+            instance ?: buildDatabase(context).also {
+                instance = it
+            }
         }
         private fun buildDatabase(context: Context) =
             Room.databaseBuilder(

@@ -4,7 +4,6 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.example.testugd1.homeMenu.homeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -21,7 +20,7 @@ class HomeActivity : AppCompatActivity() {
         navigation.setOnItemSelectedListener{ item->
             when(item.itemId){
                 R.id.Search -> changeFragment(searchFragment())
-                R.id.Home -> changeFragment(Fragment())
+                R.id.Home -> changeFragment(HomeFragment())
                 R.id.Profile -> changeFragment(profileFragment())
             }
             true

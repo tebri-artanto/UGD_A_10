@@ -74,19 +74,19 @@ class SignUp : AppCompatActivity() {
 
             if (!checkSignUp) return@OnClickListener
             if(checkSignUp == true){
-                mBundle.putString("username", username)
-                mBundle.putString("password", password)
+
                 CoroutineScope(Dispatchers.IO).launch {
                     db.userDao().addUser(
                         User(
                             0, username, password, email, tanggalLahir, noTelpon
                         )
                     )
-                    finish()
+
                 }
                 createNotificationChannel()
                 sendNotification1()
-
+                mBundle.putString("username", username)
+                mBundle.putString("password", password)
                 val moveHome = Intent(this, MainActivity::class.java)
                 moveHome.putExtras(mBundle)
                 startActivity(moveHome)
