@@ -109,9 +109,9 @@ class HomeFragment : Fragment() {
 
         fun loadData() {
             sharedPreferences = activity?.getSharedPreferences(mypref, Context.MODE_PRIVATE)
-            val id = sharedPreferences!!.getString(idKey, "")!!.toInt()
+            //val id = sharedPreferences!!.getString(idKey, "")!!.toInt()
                 CoroutineScope(Dispatchers.IO).launch {
-                    val pariwisata = db?.pariwisataDao()?.getPariwisata(id)
+                    val pariwisata = db?.pariwisataDao()?.getPariwisata()
                     Log.d("","dbResponse: $pariwisata")
                     withContext(Dispatchers.Main){
                         if (pariwisata != null) {
