@@ -45,13 +45,14 @@ class profileFragment : Fragment() {
             binding.textViewBirtdate.setText(user?.tanggalLahir)
             binding.textViewPhone.setText(user?.noTelpon)
         }
-        binding.buttonLogout.setOnClickListener{
-            val moveEdit = Intent(activity, MainActivity::class.java)
+
+        binding.buttonEdit.setOnClickListener{
+            val moveEdit = Intent(activity, EditProfile::class.java)
             startActivity(moveEdit)
             activity?.finish()
         }
-        binding.buttonEdit.setOnClickListener{
-            val moveEdit = Intent(activity, EditProfile::class.java)
+        binding.buttonLogout.setOnClickListener{
+            val moveEdit = Intent(activity, MainActivity::class.java)
             startActivity(moveEdit)
             activity?.finish()
         }
