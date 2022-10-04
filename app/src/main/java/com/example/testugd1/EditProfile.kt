@@ -71,8 +71,8 @@ class EditProfile : AppCompatActivity() {
                     User(
                         id,
                         binding.inputUsername.text.toString(),
-                        binding.inputEmail.text.toString(),
                         binding.inputPassword.text.toString(),
+                        binding.inputEmail.text.toString(),
                         binding.inputTanggalLahir.text.toString(),
                         binding.inputNoTelp.text.toString()
                     )
