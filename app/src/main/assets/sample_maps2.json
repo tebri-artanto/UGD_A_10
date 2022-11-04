@@ -1,0 +1,15 @@
+{
+  "results": [
+    {
+      "geometry": {
+        "location": {
+          "lat": -7.75,
+          "lng": 110.49417
+        }
+      },
+      "name": "Candi Prambanan",
+      "vicinity": "Jl. Raya Solo - Yogyakarta No.16, Kranggan, Bokoharjo, Kec. Prambanan, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55571"
+    }
+  ],
+  "status": "OK"
+}

@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/New folder/PBP/TEST/app/src/main/res/drawable-v24/bg_circle.xml" value="0.171" />
+        <entry key="..\:/New folder/PBP/TEST/app/src/main/res/drawable-v24/bg_triangle.xml" value="0.171" />
         <entry key="..\:/New folder/PBP/TEST/app/src/main/res/drawable/btc_color_green.xml" value="0.1745" />
         <entry key="..\:/New folder/PBP/TEST/app/src/main/res/drawable/btn_bg_green.xml" value="0.2295" />
         <entry key="..\:/New folder/PBP/TEST/app/src/main/res/drawable/et_round_biasa.xml" value="0.1665" />
@@ -20,18 +22,23 @@
         <entry key="..\:/New folder/PBP/TEST/app/src/main/res/layout/activity_home.xml" value="0.264" />
         <entry key="..\:/New folder/PBP/TEST/app/src/main/res/layout/activity_login.xml" value="0.22826086956521738" />
         <entry key="..\:/New folder/PBP/TEST/app/src/main/res/layout/activity_main.xml" value="0.1458966565349544" />
+        <entry key="..\:/New folder/PBP/TEST/app/src/main/res/layout/activity_map_menu.xml" value="0.23471569046601112" />
         <entry key="..\:/New folder/PBP/TEST/app/src/main/res/layout/activity_note_adapter.xml" value="0.1" />
         <entry key="..\:/New folder/PBP/TEST/app/src/main/res/layout/activity_pariwisata_adapter.xml" value="0.264" />
         <entry key="..\:/New folder/PBP/TEST/app/src/main/res/layout/activity_profile_adapter.xml" value="0.2907608695652174" />
         <entry key="..\:/New folder/PBP/TEST/app/src/main/res/layout/activity_sign_up.xml" value="0.2625" />
+        <entry key="..\:/New folder/PBP/TEST/app/src/main/res/layout/bg_circle.xml" value="0.264" />
+        <entry key="..\:/New folder/PBP/TEST/app/src/main/res/layout/bg_rounded_rect.xml" value="0.24625908507909364" />
+        <entry key="..\:/New folder/PBP/TEST/app/src/main/res/layout/bg_triangle.xml" value="0.24625908507909364" />
         <entry key="..\:/New folder/PBP/TEST/app/src/main/res/layout/fragment.xml" value="0.1" />
         <entry key="..\:/New folder/PBP/TEST/app/src/main/res/layout/fragment_home.xml" value="0.264" />
         <entry key="..\:/New folder/PBP/TEST/app/src/main/res/layout/fragment_home2.xml" value="0.1" />
         <entry key="..\:/New folder/PBP/TEST/app/src/main/res/layout/fragment_profile.xml" value="0.26313405797101447" />
         <entry key="..\:/New folder/PBP/TEST/app/src/main/res/layout/fragment_profile2.xml" value="0.28442028985507245" />
         <entry key="..\:/New folder/PBP/TEST/app/src/main/res/layout/fragment_profile_edit.xml" value="0.24094202898550723" />
-        <entry key="..\:/New folder/PBP/TEST/app/src/main/res/layout/fragment_search.xml" value="0.26313405797101447" />
+        <entry key="..\:/New folder/PBP/TEST/app/src/main/res/layout/fragment_search.xml" value="0.176" />
         <entry key="..\:/New folder/PBP/TEST/app/src/main/res/layout/fragment_search2.xml" value="0.26313405797101447" />
+        <entry key="..\:/New folder/PBP/TEST/app/src/main/res/layout/layout_tooltip.xml" value="0.24625908507909364" />
         <entry key="..\:/New folder/PBP/TEST/app/src/main/res/layout/rv_item_pariwisata.xml" value="0.14375" />
         <entry key="..\:/New folder/PBP/TEST/app/src/main/res/layout/spalsh_screen.xml" value="0.2" />
         <entry key="..\:/New folder/PBP/TEST/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.3300970873786408" />
