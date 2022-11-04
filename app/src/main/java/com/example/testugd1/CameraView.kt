@@ -17,7 +17,6 @@ class CameraView(context: Context?, private val mCamera: Camera) : SurfaceView(c
         mHolder.addCallback(this)
         mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS)
     }
-
     override fun surfaceCreated (surfaceHolder: SurfaceHolder){
         try{
             mCamera.setPreviewDisplay(mHolder)

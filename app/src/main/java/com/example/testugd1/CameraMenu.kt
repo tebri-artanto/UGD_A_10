@@ -17,7 +17,6 @@ class CameraMenu : AppCompatActivity() {
     private var mCamera: Camera? = null
     private var mCameraView: CameraView? = null
     private lateinit var binding: ActivityCameraMenuBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera_menu)
