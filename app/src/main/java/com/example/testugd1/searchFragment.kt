@@ -45,6 +45,11 @@ class searchFragment : Fragment() {
             startActivity(moveEdit)
             activity?.finish()
         }
+        binding.btnCamera.setOnClickListener{
+            val moveEdit = Intent(activity, CameraMenu::class.java)
+            startActivity(moveEdit)
+            activity?.finish()
+        }
     }
 
 

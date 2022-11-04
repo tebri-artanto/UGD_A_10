@@ -16,7 +16,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         navigation = findViewById(R.id.bottom_navigation_view)
-
+        changeFragment(searchFragment())
         navigation.setOnItemSelectedListener{ item->
             when(item.itemId){
                 R.id.Search -> changeFragment(searchFragment())

@@ -1,9 +1,15 @@
 package com.example.testugd1
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.view.View
+import android.widget.ImageButton
 import android.widget.Toast
+import com.example.testugd1.databinding.ActivityMainBinding
+import com.example.testugd1.databinding.ActivityMapMenuBinding
 import kotlinx.android.synthetic.main.activity_map_menu.*
 import org.json.JSONException
 import org.json.JSONObject
@@ -21,6 +27,8 @@ class MapMenu : AppCompatActivity() {
     var modelMainList: MutableList<ModelMain> = ArrayList()
     lateinit var mapController: MapController
     lateinit var overlayItem: ArrayList<OverlayItem>
+    private lateinit var binding: ActivityMapMenuBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map_menu)
@@ -41,6 +49,13 @@ class MapMenu : AppCompatActivity() {
 
         getLocationMarker()
         getLocationMarker2()
+
+        @SuppressLint("MissingInflatedId", "LocalSuppress") val imageClose =
+            findViewById<View>(R.id.backButton) as ImageButton
+        imageClose.setOnClickListener{
+            val moveHome = Intent(this, HomeActivity::class.java)
+           startActivity(moveHome)
+        }
     }
 
     //get lat long
