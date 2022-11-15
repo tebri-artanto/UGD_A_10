@@ -24,7 +24,7 @@ import com.example.testugd1.adapters.MahasiswaAdapter
 import org.json.JSONObject
 import java.nio.charset.StandardCharsets
 
-class MainActivity : AppCompatActivity() {
+class DestinasiMain : AppCompatActivity() {
     private var srMahasiswa: SwipeRefreshLayout? = null
     private var adapter: MahasiswaAdapter? = null
     private var svMahasiswa: SearchView? = null
