@@ -5,7 +5,22 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.Button
+import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
+import com.android.volley.AuthFailureError
+import com.android.volley.Request
+import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import com.example.testugd1.api.DestinasiApi
+import com.example.testugd1.models.Destinasi
+import com.google.gson.Gson
 import org.json.JSONObject
 import java.nio.charset.StandardCharsets
 
@@ -15,9 +30,9 @@ class AddEditDestinasi : AppCompatActivity() {
     }
 
     private var etNama: EditText? = null
-    private var etNPM: EditText? = null
-    private var edFakultas: AutoCompleteTextView? = null
-    private var edProdi: AutoCompleteTextView? = null
+    private var etLokasi: EditText? = null
+    private var etHarga: EditText? = null
+    private var etType: AutoCompleteTextView? = null
     private var layoutLoading: LinearLayout? = null
     private var queue: RequestQueue? = null
 
@@ -27,9 +42,9 @@ class AddEditDestinasi : AppCompatActivity() {
 
         queue = Volley.newRequestQueue(this)
         etNama = findViewById(R.id.et_nama)
-        etNPM = findViewById(R.id.et_npm)
-        edFakultas = findViewById(R.id.ed_fakultas)
-        edProdi = findViewById(R.id.ed_prodi)
+        etLokasi = findViewById(R.id.et_Lokasi)
+        etHarga = findViewById(R.id.et_Harga)
+        etType = findViewById(R.id.et_Tipe)
         layoutLoading = findViewById(R.id.layout_loading)
 
         setExposedDropDownMenu()
@@ -37,47 +52,44 @@ class AddEditDestinasi : AppCompatActivity() {
         val btnCancel = findViewById<Button>(R.id.btn_cancel)
         btnCancel.setOnClickListener { finish() }
         val btnSave = findViewById<Button>(R.id.btn_save)
-        val tvTitle = findViewById<TextView>(R.id.tv_title)
+        val tvTitle = findViewById<TextView>(R.id.addDestinasi)
         val id = intent.getLongExtra("id", -1)
         if (id == -1L) {
-            tvTitle.setText("Tambah Mahasiswa")
-            btnSave.setOnClickListener { createMahasiswa() }
+            tvTitle.setText("Tambah Destinasi")
+            btnSave.setOnClickListener { createDestinasi() }
         } else {
-            tvTitle.setText("Edit Mahasiswa")
-            getMahasiswaById(id)
-            btnSave.setOnClickListener { updateMahasiswa(id) }
+            tvTitle.setText("Edit Destinasi")
+            getDestinasiById(id)
+            btnSave.setOnClickListener { updateDestinasi(id) }
         }
     }
 
     fun setExposedDropDownMenu() {
-        val adapterFakultas: ArrayAdapter<String> = ArrayAdapter<String>(this,
-            R.layout.item_list, FAKULTAS_LIST)
-        edFakultas!!.setAdapter(adapterFakultas)
+        val adapterType: ArrayAdapter<String> = ArrayAdapter<String>(this,
+            R.layout.TIPE_LIST)
+        etType!!.setAdapter(adapterType)
 
-        val adapterProdi: ArrayAdapter<String> = ArrayAdapter<String>(this,
-            R.layout.item_list, PRODI_LIST)
-        edProdi!!.setAdapter(adapterProdi)
     }
 
-    private fun getMahasiswaById(id: Long) {
-        // fungsi untuk menampilkan data mahasiswa berdasarkan id
+    private fun getDestinasiById(id: Long) {
+        // fungsi untuk menampilkan data Destinasi berdasarkan id
         setLoading(true)
         val stringRequest: StringRequest = object :
             StringRequest(
-                Method.GET,
-                MahasiswaApi.GET_BY_ID_URL + id,
+                Request.Method.GET,
+                DestinasiApi.GET_BY_ID_URL + id,
                 Response.Listener { response ->
                     val gson = Gson()
-                    val mahasiswa = gson.fromJson(response, Mahasiswa::class.java)
+                    val destinasi = gson.fromJson(response, Destinasi::class.java)
 
-                    etNama!!.setText(mahasiswa.nama)
-                    etNPM!!.setText(mahasiswa.npm)
-                    edFakultas!!.setText(mahasiswa.fakultas)
-                    edProdi!!.setText(mahasiswa.prodi)
+                    etNama!!.setText(destinasi.nama)
+                    etLokasi!!.setText(destinasi.lokasi)
+                    etHarga!!.setText(destinasi.harga)
+                    etType!!.setText(destinasi.tipe)
                     setExposedDropDownMenu()
 
                     Toast.makeText(
-                        this@AddEditActivity,
+                        this@AddEditDestinasi,
                         "Data berhasil diambil!",
                         Toast.LENGTH_SHORT
                     ).show()
@@ -90,12 +102,12 @@ class AddEditDestinasi : AppCompatActivity() {
                             String(error.networkResponse.data, StandardCharsets.UTF_8)
                         val errors = JSONObject(responseBody)
                         Toast.makeText(
-                            this@AddEditActivity,
+                            this@AddEditDestinasi,
                             errors.getString("message"),
                             Toast.LENGTH_SHORT
                         ).show()
                     } catch (e: Exception) {
-                        Toast.makeText(this@AddEditActivity, e.message, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@AddEditDestinasi, e.message, Toast.LENGTH_SHORT).show()
                     }
                 }) {
             @Throws(AuthFailureError::class)
@@ -108,23 +120,23 @@ class AddEditDestinasi : AppCompatActivity() {
         queue!!.add(stringRequest)
     }
 
-    private fun createMahasiswa() {
+    private fun createDestinasi() {
         setLoading(true)
 
-        val mahasiswa = Mahasiswa(
+        val destinasi = Destinasi(
             etNama!!.text.toString(),
-            etNPM!!.text.toString(),
-            edFakultas!!.text.toString(),
-            edProdi!!.text.toString()
+            etLokasi!!.text.toString(),
+            etHarga!!.text.toString(),
+            etType!!.text.toString()
         )
 
         val stringRequest: StringRequest =
-            object : StringRequest(Method.POST, MahasiswaApi.ADD_URL, Response.Listener { response ->
+            object : StringRequest(Method.POST, DestinasiApi.ADD_URL, Response.Listener { response ->
                 val gson = Gson()
-                var mahasiswa = gson.fromJson(response, Mahasiswa::class.java)
+                var destinasi = gson.fromJson(response, Destinasi::class.java)
 
-                if (mahasiswa != null)
-                    Toast.makeText(this@AddEditActivity, "Data Berhasil Ditambahkan", Toast.LENGTH_SHORT).show()
+                if (destinasi != null)
+                    Toast.makeText(this@AddEditDestinasi, "Data Berhasil Ditambahkan", Toast.LENGTH_SHORT).show()
 
                 val returnIntent = Intent()
                 setResult(RESULT_OK, returnIntent)
@@ -137,12 +149,12 @@ class AddEditDestinasi : AppCompatActivity() {
                     val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
                     val errors = JSONObject(responseBody)
                     Toast.makeText(
-                        this@AddEditActivity,
+                        this@AddEditDestinasi,
                         errors.getString("message"),
                         Toast.LENGTH_SHORT
                     ).show()
                 } catch (e: Exception) {
-                    Toast.makeText(this@AddEditActivity, e.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@AddEditDestinasi, e.message, Toast.LENGTH_SHORT).show()
                 }
             }) {
                 @Throws(AuthFailureError::class)
@@ -155,7 +167,7 @@ class AddEditDestinasi : AppCompatActivity() {
                 @Throws(AuthFailureError::class)
                 override fun getBody(): ByteArray {
                     val gson = Gson()
-                    val requestBody = gson.toJson(mahasiswa)
+                    val requestBody = gson.toJson(destinasi)
                     return requestBody.toByteArray(StandardCharsets.UTF_8)
                 }
 
@@ -166,21 +178,21 @@ class AddEditDestinasi : AppCompatActivity() {
         queue!!.add(stringRequest)
     }
 
-    private fun updateMahasiswa(id: Long){
+    private fun updateDestinasi(id: Long){
         setLoading(true)
-        val mahasiswa = Mahasiswa(
+        val destinasi = Destinasi(
             etNama!!.text.toString(),
-            etNPM!!.text.toString(),
-            edFakultas!!.text.toString(),
-            edProdi!!.text.toString()
+            etLokasi!!.text.toString(),
+            etHarga!!.text.toString(),
+            etType!!.text.toString()
         )
         val stringRequest: StringRequest =
-            object: StringRequest(Method.PUT, MahasiswaApi.UPDATE_URL + id, Response.Listener { response ->
+            object: StringRequest(Method.PUT, DestinasiApi.UPDATE_URL + id, Response.Listener { response ->
                 val gson = Gson()
-                var mahasiswa = gson.fromJson(response, Mahasiswa::class.java)
+                var Destinasi = gson.fromJson(response, Destinasi::class.java)
 
-                if(mahasiswa != null)
-                    Toast.makeText(this@AddEditActivity, "Data berhasil diubah", Toast.LENGTH_SHORT).show()
+                if(destinasi != null)
+                    Toast.makeText(this@AddEditDestinasi, "Data berhasil diubah", Toast.LENGTH_SHORT).show()
 
                 val returnIntent = Intent()
                 setResult(RESULT_OK, returnIntent)
@@ -198,7 +210,7 @@ class AddEditDestinasi : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                 } catch (e: Exception){
-                    Toast.makeText(this@AddEditActivity, e.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@AddEditDestinasi, e.message, Toast.LENGTH_SHORT).show()
                 }
             }){
                 @Throws(AuthFailureError::class)
@@ -211,7 +223,7 @@ class AddEditDestinasi : AppCompatActivity() {
                 @Throws(AuthFailureError::class)
                 override fun getBody(): ByteArray {
                     val gson = Gson()
-                    val requestBody = gson.toJson(mahasiswa)
+                    val requestBody = gson.toJson(destinasi)
                     return requestBody.toByteArray(StandardCharsets.UTF_8)
                 }
 

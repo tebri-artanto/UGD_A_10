@@ -43,7 +43,7 @@
             app:startIconDrawable="@drawable/ic_baseline_deck_24">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/input_username"
+                android:id="@+id/et_nama"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/et_style"
@@ -63,7 +63,7 @@
             app:startIconDrawable="@drawable/ic_baseline_location_on_24">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputLokasiDestinasi"
+                android:id="@+id/et_Lokasi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/et_style"
@@ -82,7 +82,7 @@
             app:startIconDrawable="@drawable/ic_baseline_attach_money_24">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputHarga"
+                android:id="@+id/et_Harga"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/et_style"
@@ -100,7 +100,7 @@
             app:startIconDrawable="@drawable/ic_baseline_type">
 
             <AutoCompleteTextView
-                android:id="@+id/inputTipe"
+                android:id="@+id/et_Tipe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/et_style"

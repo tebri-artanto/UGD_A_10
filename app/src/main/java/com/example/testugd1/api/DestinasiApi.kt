@@ -1,4 +1,4 @@
-package com.example.gd11_a_0680.api
+package com.example.testugd1.api
 
 class DestinasiApi {
     companion object {

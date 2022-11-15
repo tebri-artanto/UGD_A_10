@@ -1,4 +1,4 @@
-package com.example.gd11_a_0680.adapters
+package com.example.testugd1.adapters
 
 import android.content.Context
 import android.content.Intent
@@ -12,7 +12,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.example.testugd1.AddEditDestinasi
 import com.example.testugd1.DestinasiMain
 import com.example.testugd1.R
-import com.example.gd11_a_0680.models.Destinasi
+import com.example.testugd1.models.Destinasi
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -57,7 +57,7 @@ class DestinasiAdapter (private var destinasiList: List<Destinasi>, context: Con
                 .setNegativeButton("Batal", null)
                 .setPositiveButton("Hapus") { _, _ ->
                     if (context is DestinasiMain) destinasi.id?.let { it1 ->
-                        context.deleteDestinasi(
+                        context.deleteMahasiswa(
                             it1
                         )
                     }

@@ -16,17 +16,17 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.testugd1.api.MahasiswaApi
-import com.example.testugd1.models.Mahasiswa
+import com.example.testugd1.api.DestinasiApi
+import com.example.testugd1.models.Destinasi
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
-import com.example.testugd1.adapters.MahasiswaAdapter
+import com.example.testugd1.adapters.DestinasiAdapter
 import org.json.JSONObject
 import java.nio.charset.StandardCharsets
 
 class DestinasiMain : AppCompatActivity() {
     private var srMahasiswa: SwipeRefreshLayout? = null
-    private var adapter: MahasiswaAdapter? = null
+    private var adapter: DestinasiAdapter? = null
     private var svMahasiswa: SearchView? = null
     private var layoutLoading: LinearLayout? = null
     private var queue: RequestQueue? = null

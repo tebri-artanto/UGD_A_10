@@ -1,7 +1,5 @@
 package com.example.testugd1.Entity
 
-import com.example.testugd1.R
-
 class TempatPariwisata (var Nama_Tempat: String, var Kapasitas: Int) {
     companion object{
         var litsOfKelas = arrayOf(
