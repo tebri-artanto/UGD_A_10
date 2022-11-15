@@ -1,5 +1,6 @@
 package com.example.testugd1
 
+
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -37,7 +38,7 @@ class DestinasiMain : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_destinasi_main)
 
         queue = Volley.newRequestQueue(this)
         layoutLoading = findViewById(R.id.layout_loading)
@@ -46,12 +47,12 @@ class DestinasiMain : AppCompatActivity() {
 
         srDestinasi?.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener { allDestinasi()  })
         svDestinasi?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextChange(s: String?): Boolean {
+            override fun onQueryTextChange(p0: String?): Boolean {
                 return false
             }
 
-            override fun onQueryTextSubmit(s: String?): Boolean {
-                adapter!!.filter.filter(s)
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                adapter!!.filter.filter(p0)
                 return false
             }
         })
@@ -74,7 +75,7 @@ class DestinasiMain : AppCompatActivity() {
         val stringRequest: StringRequest = object :
             StringRequest(Method.GET, DestinasiApi.GET_ALL_URL, Response.Listener { response ->
                 val gson = Gson()
-                var destinasi : Array<Destinasi> = gson.fromJson(response, Array<DestinasiMain>::class.java)
+                var destinasi : Array<Destinasi> = gson.fromJson(response, Array<Destinasi>::class.java)
 
                 adapter!!.setDestinasiList(destinasi)
                 adapter!!.filter.filter(svDestinasi!!.query)
