@@ -20,6 +20,7 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.testugd1.api.DestinasiApi
 import com.example.testugd1.models.Destinasi
+import com.example.testugd1.api.DestinasiApi.Companion.GET_BY_ID_URL
 import com.google.gson.Gson
 import org.json.JSONObject
 import java.nio.charset.StandardCharsets
@@ -66,7 +67,7 @@ class AddEditDestinasi : AppCompatActivity() {
 
     fun setExposedDropDownMenu() {
         val adapterType: ArrayAdapter<String> = ArrayAdapter<String>(this,
-            R.layout.TIPE_LIST)
+            R.layout.item_destinasi, TIPE_LIST)
         etType!!.setAdapter(adapterType)
 
     }

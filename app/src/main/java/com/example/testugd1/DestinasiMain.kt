@@ -25,9 +25,9 @@ import org.json.JSONObject
 import java.nio.charset.StandardCharsets
 
 class DestinasiMain : AppCompatActivity() {
-    private var srMahasiswa: SwipeRefreshLayout? = null
+    private var srDestinasi: SwipeRefreshLayout? = null
     private var adapter: DestinasiAdapter? = null
-    private var svMahasiswa: SearchView? = null
+    private var svDestinasi: SearchView? = null
     private var layoutLoading: LinearLayout? = null
     private var queue: RequestQueue? = null
 
@@ -41,11 +41,11 @@ class DestinasiMain : AppCompatActivity() {
 
         queue = Volley.newRequestQueue(this)
         layoutLoading = findViewById(R.id.layout_loading)
-        srMahasiswa = findViewById(R.id.sr_mahasiswa)
-        svMahasiswa = findViewById(R.id.sv_mahasiswa)
+        srDestinasi = findViewById(R.id.sr_destinasi)
+        svDestinasi = findViewById(R.id.sv_destinasi)
 
-        srMahasiswa?.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener { allMahasiswa()  })
-        svMahasiswa?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        srDestinasi?.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener { allDestinasi()  })
+        svDestinasi?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(s: String?): Boolean {
                 return false
             }
@@ -58,47 +58,47 @@ class DestinasiMain : AppCompatActivity() {
 
         val fabAdd = findViewById<FloatingActionButton>(R.id.fab_add)
         fabAdd.setOnClickListener {
-            val i = Intent(this@MainActivity, AddEditActivity::class.java)
+            val i = Intent(this@DestinasiMain, AddEditDestinasi::class.java)
             startActivityForResult(i, LAUNCH_ADD_ACTIVITY)
         }
 
-        val rvProduk = findViewById<RecyclerView>(R.id.rv_mahasiswa)
-        adapter = MahasiswaAdapter(ArrayList(), this)
+        val rvProduk = findViewById<RecyclerView>(R.id.rv_destinasi)
+        adapter = DestinasiAdapter(ArrayList(), this)
         rvProduk.layoutManager = LinearLayoutManager(this)
         rvProduk.adapter = adapter
-        allMahasiswa()
+        allDestinasi()
     }
 
-    private fun allMahasiswa() {
-        srMahasiswa!!.isRefreshing = true
+    private fun allDestinasi() {
+        srDestinasi!!.isRefreshing = true
         val stringRequest: StringRequest = object :
-            StringRequest(Method.GET, MahasiswaApi.GET_ALL_URL, Response.Listener { response ->
+            StringRequest(Method.GET, DestinasiApi.GET_ALL_URL, Response.Listener { response ->
                 val gson = Gson()
-                var mahasiswa : Array<Mahasiswa> = gson.fromJson(response, Array<Mahasiswa>::class.java)
+                var destinasi : Array<Destinasi> = gson.fromJson(response, Array<DestinasiMain>::class.java)
 
-                adapter!!.setMahasiswaList(mahasiswa)
-                adapter!!.filter.filter(svMahasiswa!!.query)
-                srMahasiswa!!.isRefreshing = false
+                adapter!!.setDestinasiList(destinasi)
+                adapter!!.filter.filter(svDestinasi!!.query)
+                srDestinasi!!.isRefreshing = false
 
-                if(!mahasiswa.isEmpty())
-                    Toast.makeText(this@MainActivity, "Data Berhasil Diambil!", Toast.LENGTH_SHORT)
+                if(!destinasi.isEmpty())
+                    Toast.makeText(this@DestinasiMain, "Data Berhasil Diambil!", Toast.LENGTH_SHORT)
                         .show()
                 else
-                    Toast.makeText(this@MainActivity, "Data Kosong!", Toast.LENGTH_SHORT)
+                    Toast.makeText(this@DestinasiMain, "Data Kosong!", Toast.LENGTH_SHORT)
                         .show()
             }, Response.ErrorListener { error ->
-                srMahasiswa!!.isRefreshing = false
+                srDestinasi!!.isRefreshing = false
                 try{
                     val responseBody =
                         String(error.networkResponse.data, StandardCharsets.UTF_8)
                     val errors = JSONObject(responseBody)
                     Toast.makeText(
-                        this@MainActivity,
+                        this@DestinasiMain,
                         errors.getString("message"),
                         Toast.LENGTH_SHORT
                     ).show()
                 } catch (e: Exception) {
-                    Toast.makeText(this@MainActivity, e.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@DestinasiMain, e.message, Toast.LENGTH_SHORT).show()
                 }
             }) {
             // Menambahkan header pada request
@@ -112,29 +112,29 @@ class DestinasiMain : AppCompatActivity() {
         queue!!.add(stringRequest)
     }
 
-    fun deleteMahasiswa(id: Long) {
+    fun deleteDestinasi(id: Long) {
         setLoading(true)
         val stringRequest: StringRequest = object :
-            StringRequest(Method.DELETE, MahasiswaApi.DELETE_URL + id, Response.Listener { response ->
+            StringRequest(Method.DELETE, DestinasiApi.DELETE_URL + id, Response.Listener { response ->
                 setLoading(false)
 
                 val gson = Gson()
-                var mahasiswa = gson.fromJson(response, Mahasiswa::class.java)
-                if(mahasiswa != null)
-                    Toast.makeText(this@MainActivity, "Data Berhasil Dihapus!", Toast.LENGTH_SHORT).show()
-                allMahasiswa()
+                var destinasi = gson.fromJson(response, Destinasi::class.java)
+                if(destinasi != null)
+                    Toast.makeText(this@DestinasiMain, "Data Berhasil Dihapus!", Toast.LENGTH_SHORT).show()
+                allDestinasi()
             }, Response.ErrorListener { error ->
                 setLoading(false)
                 try{
                     val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
                     val errors = JSONObject(responseBody)
                     Toast.makeText(
-                        this@MainActivity,
+                        this@DestinasiMain,
                         errors.getString("message"),
                         Toast.LENGTH_SHORT
                     ).show()
                 } catch (e: java.lang.Exception) {
-                    Toast.makeText(this@MainActivity, e.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@DestinasiMain, e.message, Toast.LENGTH_SHORT).show()
                 }
             }) {
             // Menambahkan header pada request
@@ -150,7 +150,7 @@ class DestinasiMain : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == LAUNCH_ADD_ACTIVITY && resultCode == RESULT_OK) allMahasiswa()
+        if (requestCode == LAUNCH_ADD_ACTIVITY && resultCode == RESULT_OK) allDestinasi()
     }
 
     // Fungsi ini digunakan menampilkan layout loading

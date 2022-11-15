@@ -57,7 +57,7 @@ class DestinasiAdapter (private var destinasiList: List<Destinasi>, context: Con
                 .setNegativeButton("Batal", null)
                 .setPositiveButton("Hapus") { _, _ ->
                     if (context is DestinasiMain) destinasi.id?.let { it1 ->
-                        context.deleteMahasiswa(
+                        context.deleteDestinasi(
                             it1
                         )
                     }
@@ -109,9 +109,9 @@ class DestinasiAdapter (private var destinasiList: List<Destinasi>, context: Con
 
         init {
             tvNama = itemView.findViewById(R.id.tv_nama)
-            tvLokasi = itemView.findViewById(R.id.tv_npm)
-            tvTipe = itemView.findViewById(R.id.tv_prodi)
-            tvHarga = itemView.findViewById(R.id.tv_fakultas)
+            tvLokasi = itemView.findViewById(R.id.tv_lokasi)
+            tvTipe = itemView.findViewById(R.id.tv_tipe)
+            tvHarga = itemView.findViewById(R.id.tv_harga)
             btnDelete = itemView.findViewById(R.id.btn_delete)
             cvDestinasi = itemView.findViewById(R.id.cv_destinasi)
         }
