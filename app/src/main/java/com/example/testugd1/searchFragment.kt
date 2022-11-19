@@ -50,6 +50,12 @@ class searchFragment : Fragment() {
             startActivity(moveEdit)
             activity?.finish()
         }
+
+        binding.btnDestinasi.setOnClickListener{
+            val moveEdit = Intent(activity, DestinasiMain::class.java)
+            startActivity(moveEdit)
+            activity?.finish()
+        }
     }
 
 

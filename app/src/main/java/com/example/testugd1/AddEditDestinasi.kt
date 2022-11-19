@@ -67,7 +67,7 @@ class AddEditDestinasi : AppCompatActivity() {
 
     fun setExposedDropDownMenu() {
         val adapterType: ArrayAdapter<String> = ArrayAdapter<String>(this,
-            R.layout.item_destinasi, TIPE_LIST)
+            R.layout.destinasi_list, TIPE_LIST)
         etType!!.setAdapter(adapterType)
 
     }
