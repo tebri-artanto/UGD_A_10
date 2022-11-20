@@ -128,7 +128,8 @@ class AddEditDestinasi : AppCompatActivity() {
             etNama!!.text.toString(),
             etLokasi!!.text.toString(),
             etHarga!!.text.toString(),
-            etType!!.text.toString()
+            etType!!.text.toString(),
+
         )
 
         val stringRequest: StringRequest =
