@@ -21,9 +21,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="ImageView 2 Examples"
-                android:textStyle="bold"
-                android:textSize="18sp"
+                android:text="Rekomendasi Tempat Wisata"
+                android:textColor="@color/greenBtnColor"
+                android:fontFamily="@font/poppinsbold"
+                android:textSize="24dp"
                 android:layout_gravity="center"/>
 
             <androidx.cardview.widget.CardView
@@ -53,8 +54,8 @@
                         android:layout_marginBottom="15dp"
                         android:layout_marginStart="10dp"
                         android:text="Sample ImageView with Glide"
-                        android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:fontFamily="@font/poppinsmedium"
+                        android:textSize="15dp"/>
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -86,8 +87,8 @@
                         android:layout_marginBottom="15dp"
                         android:layout_marginStart="10dp"
                         android:text="Sample ImageView with Picasso"
-                        android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:fontFamily="@font/poppinsmedium"
+                        android:textSize="15dp"/>
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

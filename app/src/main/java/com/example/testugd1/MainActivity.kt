@@ -1,5 +1,6 @@
 package com.example.testugd1
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -17,17 +18,20 @@ import com.example.testugd1.room.User
 import com.example.testugd1.room.UserDB
 import com.example.testugd1.room.UserDao
 import com.google.android.material.textfield.TextInputEditText
+import com.master.permissionhelper.PermissionHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
+    private val TAG = "MainActivity"
     val db by lazy { UserDB(this) }
     private lateinit var binding: ActivityMainBinding
     var sharedPreferences : SharedPreferences? = null
     var key = "idKey"
     var pref = "myPref"
+    internal var permissionHelper: PermissionHelper? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +40,27 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
         setText()
+
+        permissionHelper = PermissionHelper(this, arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE,  Manifest.permission.READ_EXTERNAL_STORAGE), 100)
+
+        permissionHelper?.denied {
+            if (it) {
+                Log.d(TAG, "onPermissionDeniedBySystem() called")
+                permissionHelper?.openAppDetailsActivity()
+            } else {
+                Log.d(TAG, "onPermissionDenied() called")
+            }
+        }
+
+        permissionHelper?.requestIndividual {
+            Log.d(TAG, "Individual Permission Granted")
+        }
+
+        permissionHelper?.requestAll {
+            Log.d(TAG, "All permission granted")
+        }
+
+
 
         sharedPreferences = getSharedPreferences(pref, Context.MODE_PRIVATE)
 
@@ -100,7 +125,11 @@ class MainActivity : AppCompatActivity() {
 
 
         })
-    }
+        }
+        override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+            permissionHelper?.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        }
 
 //    inner class NoteViewHolder( val view: View) : RecyclerView.ViewHolder(view)
 

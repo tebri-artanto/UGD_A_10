@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.testugd1.databinding.FragmentProfileBinding
 import com.example.testugd1.databinding.FragmentSearchBinding
+import com.example.testugd1.tidakDipakai.MainProgressBar
 import kotlinx.android.synthetic.main.fragment_search.*
 import org.json.JSONException
 import org.json.JSONObject
@@ -53,6 +54,18 @@ class searchFragment : Fragment() {
 
         binding.btnDestinasi.setOnClickListener{
             val moveEdit = Intent(activity, DestinasiMain::class.java)
+            startActivity(moveEdit)
+            activity?.finish()
+        }
+
+        binding.btnQrCode.setOnClickListener{
+            val moveEdit = Intent(activity, QRMain::class.java)
+            startActivity(moveEdit)
+            activity?.finish()
+        }
+
+        binding.btnRekomendasi.setOnClickListener{
+            val moveEdit = Intent(activity, MainProgressBar::class.java)
             startActivity(moveEdit)
             activity?.finish()
         }
