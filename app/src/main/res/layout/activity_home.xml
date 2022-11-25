@@ -7,17 +7,39 @@
     tools:context=".HomeActivity">
 
 
+<!--    <me.ibrahimsn.lib.SmoothBottomBar-->
+<!--        android:id="@+id/bottomBar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="70dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:menu="@menu/bottom_navigation_menu"-->
+<!--        app:backgroundColor="@color/greenBtnColor"-->
+<!--        app:indicatorColor="@color/indicatorColor"-->
+<!--        app:indicatorRadius="10dp"-->
+<!--        app:itemPadding="10dp"-->
+<!--        app:textColor="@color/white"-->
+<!--        app:itemFontFamily="@font/poppinsbold"-->
+<!--        app:textSize="14sp"-->
+<!--        app:iconSize="24dp"-->
+<!--        app:iconTint="@color/iconTint"-->
+<!--        app:iconTintActive="@color/iconTintActive"-->
+<!--        />-->
+
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/frame_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation_view"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintVertical_bias="0.0"/>
-
+        app:layout_constraintVertical_bias="0.0"
+        />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation_view"
@@ -30,5 +52,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/bottom_navigation_menu"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -53,7 +53,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="15dp"
                         android:layout_marginStart="10dp"
-                        android:text="Sample ImageView with Glide"
+                        android:text="Candi Prambanan"
                         android:fontFamily="@font/poppinsmedium"
                         android:textSize="15dp"/>
 
@@ -86,12 +86,14 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="15dp"
                         android:layout_marginStart="10dp"
-                        android:text="Sample ImageView with Picasso"
+                        android:text="Candi Borobudur"
                         android:fontFamily="@font/poppinsmedium"
                         android:textSize="15dp"/>
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
+
 
 
         </LinearLayout>

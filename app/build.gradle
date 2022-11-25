@@ -80,6 +80,6 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.8'
 //Permission Helper
     implementation 'com.github.pankaj89:PermissionHelper:2.3'
-//Keppsafe
-    implementation 'com.getkeepsafe.taptargetview:taptargetview:1.13.3'
+//smooth bottom bar
+    implementation 'com.github.ibrahimsn98:SmoothBottomBar:1.7.9'
 }

@@ -11,4 +11,10 @@
     <color name="colorBackgroundAwal">#fff7e7</color>
     <color name="coklat_muda">#f7f6f9</color>
     <color name="yellow">#FDE300</color>
+
+    <color name="indicatorColor">#2DFFFFFF</color>
+    <color name="iconTint">#C8ffffff</color>
+    <color name="iconTintActive">#ffffff</color>
+
+
 </resources>
