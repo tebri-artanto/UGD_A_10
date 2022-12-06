@@ -82,4 +82,17 @@ dependencies {
     implementation 'com.github.pankaj89:PermissionHelper:2.3'
 //smooth bottom bar
     implementation 'com.github.ibrahimsn98:SmoothBottomBar:1.7.9'
+
+//Unit Testing
+    androidTestImplementation 'androidx.test:runner:1.4.0'
+    androidTestImplementation 'androidx.test:rules:1.4.0'
+
+// Optional -- Hamcrest Library
+    androidTestImplementation 'org.hamcrest:hamcrest-library:1.3'
+
+//Optional -- UI testing with Espresso
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+// Optional -- UI testing with UI Automator
+    androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
 }
