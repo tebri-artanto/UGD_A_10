@@ -77,7 +77,7 @@ class AddEditDestinasi : AppCompatActivity() {
         setLoading(true)
         val stringRequest: StringRequest = object :
             StringRequest(
-                Request.Method.GET,
+                Method.GET,
                 DestinasiApi.GET_BY_ID_URL + id,
                 Response.Listener { response ->
                     val gson = Gson()
@@ -124,60 +124,76 @@ class AddEditDestinasi : AppCompatActivity() {
     private fun createDestinasi() {
         setLoading(true)
 
-        val destinasi = Destinasi(
-            etNama!!.text.toString(),
-            etLokasi!!.text.toString(),
-            etHarga!!.text.toString(),
-            etType!!.text.toString(),
+        if(etNama!!.text.toString().isEmpty()){
+            Toast.makeText(this@AddEditDestinasi, "Nama Destinasi Tidak boleh Kosong!", Toast.LENGTH_SHORT).show()
+        }
+        else if(etLokasi!!.text.toString().isEmpty()){
+            Toast.makeText(this@AddEditDestinasi, "Lokasi Destinasi Tidak boleh Kosong!", Toast.LENGTH_SHORT).show()
+        }
+        else if(etHarga!!.text.toString().isEmpty()){
+            Toast.makeText(this@AddEditDestinasi, "Harga Destinasi Tidak boleh Kosong!", Toast.LENGTH_SHORT).show()
+        }
+        else if(etType!!.text.toString().isEmpty()){
+            Toast.makeText(this@AddEditDestinasi, "Tipe Destinasi Tidak boleh Kosong!", Toast.LENGTH_SHORT).show()
+        }
+        else{
+            val destinasi = Destinasi(
+                etNama!!.text.toString(),
+                etLokasi!!.text.toString(),
+                etHarga!!.text.toString(),
+                etType!!.text.toString(),
 
-        )
+                )
 
-        val stringRequest: StringRequest =
-            object : StringRequest(Method.POST, DestinasiApi.ADD_URL, Response.Listener { response ->
-                val gson = Gson()
-                var destinasi = gson.fromJson(response, Destinasi::class.java)
-
-                if (destinasi != null)
-                    Toast.makeText(this@AddEditDestinasi, "Data Berhasil Ditambahkan", Toast.LENGTH_SHORT).show()
-
-                val returnIntent = Intent()
-                setResult(RESULT_OK, returnIntent)
-                finish()
-
-                setLoading(false)
-            }, Response.ErrorListener { error ->
-                setLoading(false)
-                try {
-                    val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
-                    val errors = JSONObject(responseBody)
-                    Toast.makeText(
-                        this@AddEditDestinasi,
-                        errors.getString("message"),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                } catch (e: Exception) {
-                    Toast.makeText(this@AddEditDestinasi, e.message, Toast.LENGTH_SHORT).show()
-                }
-            }) {
-                @Throws(AuthFailureError::class)
-                override fun getHeaders(): Map<String, String> {
-                    val headers = HashMap<String, String>()
-                    headers["Accept"] = "application/json"
-                    return headers
-                }
-
-                @Throws(AuthFailureError::class)
-                override fun getBody(): ByteArray {
+            val stringRequest: StringRequest =
+                object : StringRequest(Method.POST, DestinasiApi.ADD_URL, Response.Listener { response ->
                     val gson = Gson()
-                    val requestBody = gson.toJson(destinasi)
-                    return requestBody.toByteArray(StandardCharsets.UTF_8)
-                }
+                    var destinasi = gson.fromJson(response, Destinasi::class.java)
 
-                override fun getBodyContentType(): String {
-                    return "application/json"
+                    if (destinasi != null)
+                        Toast.makeText(this@AddEditDestinasi, "Data Berhasil Ditambahkan", Toast.LENGTH_SHORT).show()
+
+                    val returnIntent = Intent()
+                    setResult(RESULT_OK, returnIntent)
+                    finish()
+
+                    setLoading(false)
+                }, Response.ErrorListener { error ->
+                    setLoading(false)
+                    try {
+                        val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
+                        val errors = JSONObject(responseBody)
+                        Toast.makeText(
+                            this@AddEditDestinasi,
+                            errors.getString("message"),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } catch (e: Exception) {
+                        Toast.makeText(this@AddEditDestinasi, e.message, Toast.LENGTH_SHORT).show()
+                    }
+                }) {
+                    @Throws(AuthFailureError::class)
+                    override fun getHeaders(): Map<String, String> {
+                        val headers = HashMap<String, String>()
+                        headers["Accept"] = "application/json"
+                        return headers
+                    }
+
+                    @Throws(AuthFailureError::class)
+                    override fun getBody(): ByteArray {
+                        val gson = Gson()
+                        val requestBody = gson.toJson(destinasi)
+                        return requestBody.toByteArray(StandardCharsets.UTF_8)
+                    }
+
+                    override fun getBodyContentType(): String {
+                        return "application/json"
+                    }
                 }
-            }
-        queue!!.add(stringRequest)
+            queue!!.add(stringRequest)
+        }
+        setLoading(false)
+
     }
 
     private fun updateDestinasi(id: Long){
