@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
@@ -48,15 +49,28 @@ class SignUp : AppCompatActivity() {
     private val notificationId1 = 101
     private var queue: RequestQueue? = null
     private var layoutLoading: LinearLayout? = null
+    private var etUsername: EditText? = null
+    private var etPassword : EditText? = null
+    private var etEmail : EditText? = null
+    private var etTanggalLahir : EditText? = null
+    private var etnoTelpon : EditText? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
 
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         queue = Volley.newRequestQueue(this)
         layoutLoading = findViewById(R.id.layout_loading)
+        etUsername = findViewById(R.id.input_username)
+        etPassword = findViewById(R.id.input_password)
+        etEmail = findViewById(R.id.input_email)
+        etTanggalLahir = findViewById(R.id.input_tanggalLahir)
+        etnoTelpon = findViewById(R.id.input_noTelpon)
+
 
         binding.btnSignUp.setOnClickListener(View.OnClickListener {
             var checkSignUp = false
@@ -118,16 +132,28 @@ class SignUp : AppCompatActivity() {
     }
     private fun createSignUp() {
         setLoading(true)
-        if(binding.inputUsername!!.toString().isEmpty()){
+        if(etUsername!!.text.toString().isEmpty()){
             Toast.makeText(this@SignUp, "Username Tidak boleh Kosong!", Toast.LENGTH_SHORT).show()
         }
+        if(etPassword!!.text.toString().isEmpty()){
+            Toast.makeText(this@SignUp, "Password Tidak boleh Kosong!", Toast.LENGTH_SHORT).show()
+        }
+        if(etEmail!!.text.toString().isEmpty()){
+            Toast.makeText(this@SignUp, "Email Tidak boleh Kosong!", Toast.LENGTH_SHORT).show()
+        }
+        if(etTanggalLahir!!.text.toString().isEmpty()){
+            Toast.makeText(this@SignUp, "Tanggal Lahir Tidak boleh Kosong!", Toast.LENGTH_SHORT).show()
+        }
+        if(etnoTelpon!!.text.toString().isEmpty()){
+            Toast.makeText(this@SignUp, "No telfon Tidak boleh Kosong!", Toast.LENGTH_SHORT).show()
+        }
         else{
-            val user = Akun(
-                binding.inputUsername.getText().toString(),
-                binding.inputPassword.getText().toString(),
-                binding.inputEmail.getText().toString(),
-                binding.inputTanggalLahir.getText().toString(),
-                binding.inputNoTelpon.getText().toString(),
+            val akun = Akun(
+                etUsername!!.toString(),
+                etPassword!!.toString(),
+                etEmail!!.toString(),
+                etTanggalLahir!!.toString(),
+                etnoTelpon!!.toString(),
             )
 
             val stringRequest: StringRequest =
@@ -167,7 +193,7 @@ class SignUp : AppCompatActivity() {
                     @Throws(AuthFailureError::class)
                     override fun getBody(): ByteArray {
                         val gson = Gson()
-                        val requestBody = gson.toJson(user)
+                        val requestBody = gson.toJson(akun)
                         return requestBody.toByteArray(StandardCharsets.UTF_8)
                     }
 

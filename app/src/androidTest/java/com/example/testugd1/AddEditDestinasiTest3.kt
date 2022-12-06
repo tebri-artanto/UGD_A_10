@@ -160,30 +160,13 @@ class AddEditDestinasiTest3 {
                         withId(R.id.layoutTipe),
                         0
                     ),
-                    1
+                    0
                 )
             )
         )
-        textInputEditText4.perform(scrollTo(), replaceText("Buatan"), closeSoftKeyboard())
+        textInputEditText4.perform(replaceText("Buatan"), closeSoftKeyboard())
 
-        val materialButton5 = onView(
-            allOf(
-                withId(R.id.btn_save), withText("Simpan"),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.ll_button),
-                        childAtPosition(
-                            withClassName(`is`("androidx.constraintlayout.widget.ConstraintLayout")),
-                            1
-                        )
-                    ),
-                    1
-                ),
-                isDisplayed()
-            )
-        )
-        materialButton5.perform(click())
-        onView(isRoot()).perform(waitFor(3000))
+
     }
 
 
