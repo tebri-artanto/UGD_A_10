@@ -54,6 +54,8 @@ class SignUp : AppCompatActivity() {
     private var etEmail : EditText? = null
     private var etTanggalLahir : EditText? = null
     private var etnoTelpon : EditText? = null
+    private var emailFormat = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+    private var noTelponMin = "^[+]?[0-9]{10,13}$"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,6 +93,10 @@ class SignUp : AppCompatActivity() {
                 checkSignUp = false
             }
 
+            if (email.matches(emailFormat.toRegex())){
+                binding.inputLayoutEmail.setError("Email belum sesuai")
+                checkSignUp = false
+            }
             if (email.isEmpty()){
                 binding.inputLayoutEmail.setError("Email must be filled with text")
                 checkSignUp = false
@@ -105,7 +111,11 @@ class SignUp : AppCompatActivity() {
                 binding.inputLayoutNoTelpon.setError("No Telpon must be filled with text")
                 checkSignUp = false
             }
-            if (username.isNotEmpty() && password.isNotEmpty() && email.isNotEmpty() && tanggalLahir.isNotEmpty() && noTelpon.isNotEmpty()) checkSignUp = true
+            if (noTelpon.matches(noTelponMin.toRegex())){
+                binding.inputLayoutNoTelpon.setError("No Telpon minimal 10 digit dan maksimal 13 digit")
+                checkSignUp = false
+            }
+            if (username.isNotEmpty() && password.isNotEmpty() && email.isNotEmpty() && tanggalLahir.isNotEmpty() && noTelpon.isNotEmpty() && !email.matches(emailFormat.toRegex()) && !noTelpon.matches(noTelponMin.toRegex())) checkSignUp = true
 
             if (!checkSignUp) return@OnClickListener
             if(checkSignUp == true){
@@ -138,6 +148,9 @@ class SignUp : AppCompatActivity() {
         if(etPassword!!.text.toString().isEmpty()){
             Toast.makeText(this@SignUp, "Password Tidak boleh Kosong!", Toast.LENGTH_SHORT).show()
         }
+        if(etEmail!!.text.toString().matches(emailFormat.toRegex())){
+            Toast.makeText(this@SignUp, "Format Email salah!", Toast.LENGTH_SHORT).show()
+        }
         if(etEmail!!.text.toString().isEmpty()){
             Toast.makeText(this@SignUp, "Email Tidak boleh Kosong!", Toast.LENGTH_SHORT).show()
         }
@@ -145,6 +158,9 @@ class SignUp : AppCompatActivity() {
             Toast.makeText(this@SignUp, "Tanggal Lahir Tidak boleh Kosong!", Toast.LENGTH_SHORT).show()
         }
         if(etnoTelpon!!.text.toString().isEmpty()){
+            Toast.makeText(this@SignUp, "No telfon Tidak boleh Kosong!", Toast.LENGTH_SHORT).show()
+        }
+        if(etnoTelpon!!.text.toString().matches(noTelponMin.toRegex())){
             Toast.makeText(this@SignUp, "No telfon Tidak boleh Kosong!", Toast.LENGTH_SHORT).show()
         }
         else{
