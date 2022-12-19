@@ -80,10 +80,10 @@ class TiketAdapter (private var TiketList: List<Tiket>, context: Context) :
                 if (charSequenceString.isEmpty()) {
                     filtered.addAll(TiketList)
                 } else {
-                    for (Tiket in TiketList) {
-                        if (Tiket.nama.lowercase(Locale.getDefault())
+                    for (tiket in TiketList) {
+                        if (tiket.nama.lowercase(Locale.getDefault())
                                 .contains(charSequenceString.lowercase(Locale.getDefault()))
-                        ) filtered.add(Tiket)
+                        ) filtered.add(tiket)
                     }
                 }
                 val filterResults = FilterResults()
@@ -108,7 +108,7 @@ class TiketAdapter (private var TiketList: List<Tiket>, context: Context) :
         var cvTiket : CardView
 
         init {
-            tvNama = itemView.findViewById(R.id.tv_nama)
+            tvNama = itemView.findViewById(R.id.tv_namaPenumpang)
             tvJumlah = itemView.findViewById(R.id.tv_jumlah)
             tvWisata = itemView.findViewById(R.id.tv_wisata)
             tvPembayaran = itemView.findViewById(R.id.tv_pembayaran)

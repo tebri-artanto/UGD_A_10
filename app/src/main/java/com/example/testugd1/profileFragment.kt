@@ -30,7 +30,7 @@ import org.json.JSONObject
 import java.nio.charset.StandardCharsets
 
 
-class profileFragment(akunLogin: String) : Fragment() {
+class profileFragment() : Fragment() {
 
     val db by lazy {activity?.let { UserDB(it) }}
     private val key = "idKey"
@@ -39,7 +39,7 @@ class profileFragment(akunLogin: String) : Fragment() {
     private val binding get() = _binding!!
     var sharedPreferences : SharedPreferences? = null
     private var queue: RequestQueue? = null
-    private var userLogin= akunLogin
+    //private var userLogin= akunLogin
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         queue = Volley.newRequestQueue(requireContext())
@@ -54,7 +54,7 @@ class profileFragment(akunLogin: String) : Fragment() {
         sharedPreferences = activity?.getSharedPreferences(mypref, Context.MODE_PRIVATE)
 
         val stringRequest: StringRequest = object :
-            StringRequest(Method.GET, AkunApi.GET_BY_ID_URL + userLogin, Response.Listener { response ->
+            StringRequest(Method.GET, AkunApi.GET_BY_ID_URL + id, Response.Listener { response ->
                 val gson = Gson()
                 val user: Akun = gson.fromJson(response,Akun::class.java)
 //                var userList: Array<Akun> = gson.fromJson(response,Array<Akun>::class.java)

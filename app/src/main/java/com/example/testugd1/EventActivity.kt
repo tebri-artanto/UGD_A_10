@@ -62,6 +62,11 @@ class EventActivity : AppCompatActivity() {
             val i = Intent(this@EventActivity, AddEditEvent::class.java)
             startActivityForResult(i, LAUNCH_ADD_ACTIVITY)
         }
+        val fabback = findViewById<FloatingActionButton>(R.id.fab_back)
+        fabback.setOnClickListener {
+            val moveHome = Intent(this, HomeActivity::class.java)
+            startActivity(moveHome)
+        }
 
         val rvProduk = findViewById<RecyclerView>(R.id.rv_event)
         adapter = EventAdapter(ArrayList(), this)

@@ -61,6 +61,12 @@ class TiketMain : AppCompatActivity() {
             val i = Intent(this@TiketMain, activity_beli_tiket::class.java)
             startActivityForResult(i, LAUNCH_ADD_ACTIVITY)
         }
+        val fabback = findViewById<FloatingActionButton>(R.id.fab_back)
+        fabback.setOnClickListener {
+            val moveHome = Intent(this, HomeActivity::class.java)
+            startActivity(moveHome)
+        }
+
 
         val rvProduk = findViewById<RecyclerView>(R.id.rv_tiket)
         adapter = TiketAdapter(ArrayList(), this)
@@ -74,13 +80,13 @@ class TiketMain : AppCompatActivity() {
         val stringRequest: StringRequest = object :
             StringRequest(Method.GET, TiketApi.GET_ALL_URL, Response.Listener { response ->
                 val gson = Gson()
-                var Tiket : Array<Tiket> = gson.fromJson(response, Array<Tiket>::class.java)
+                var tiket : Array<Tiket> = gson.fromJson(response, Array<Tiket>::class.java)
 
-                adapter!!.setTiketList(Tiket)
+                adapter!!.setTiketList(tiket)
                 adapter!!.filter.filter(svTiket!!.query)
                 srTiket!!.isRefreshing = false
 
-                if(!Tiket.isEmpty())
+                if(!tiket.isEmpty())
                     Toast.makeText(this@TiketMain, "Data Berhasil Diambil!", Toast.LENGTH_SHORT)
                         .show()
                 else

@@ -15,6 +15,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.testugd1.databinding.ActivityQrmainBinding
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
@@ -50,7 +51,11 @@ class QRMain : AppCompatActivity(), View.OnClickListener {
         binding.cameraBtn.setOnClickListener(this)
         binding.galleryBtn.setOnClickListener(this)
         binding.scanBtn.setOnClickListener(this)
-
+        val fabback = findViewById<FloatingActionButton>(R.id.fab_back)
+        fabback.setOnClickListener {
+            val moveHome = Intent(this, HomeActivity::class.java)
+            startActivity(moveHome)
+        }
         cameraPermissions = arrayOf(android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
         storagePermissions = arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
@@ -82,10 +87,13 @@ class QRMain : AppCompatActivity(), View.OnClickListener {
                 }
             }
             R.id.scanBtn -> {
+                binding.scanBtn.showLoading()
                 if (imageUri == null){
                     showToast("Pick image first")
+                    binding.scanBtn.hideLoading()
                 } else {
                     detectResultFromImage()
+                    binding.scanBtn.hideLoading()
                 }
             }
         }
