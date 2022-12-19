@@ -87,10 +87,13 @@ class QRMain : AppCompatActivity(), View.OnClickListener {
                 }
             }
             R.id.scanBtn -> {
+                binding.scanBtn.showLoading()
                 if (imageUri == null){
                     showToast("Pick image first")
+                    binding.scanBtn.hideLoading()
                 } else {
                     detectResultFromImage()
+                    binding.scanBtn.hideLoading()
                 }
             }
         }
