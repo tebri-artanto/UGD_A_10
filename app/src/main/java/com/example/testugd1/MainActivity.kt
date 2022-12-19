@@ -36,6 +36,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.nio.charset.StandardCharsets
+import com.shashank.sony.fancytoastlib.FancyToast
 
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
@@ -91,9 +92,11 @@ class MainActivity : AppCompatActivity() {
         }
         val moveHome = Intent(this, HomeActivity::class.java)
         binding.btnLogin.setOnClickListener(View.OnClickListener {
+            binding.btnLogin.showLoading()
             var checkLogin = false
             val username: String = etUsername.getText().toString()
             val password: String = etPassword.getText().toString()
+            val dataTemp = Bundle()
 
             if (username.isEmpty()) {
                 binding.inputTextUsername.setError("Username must be filled with text")
@@ -129,57 +132,45 @@ class MainActivity : AppCompatActivity() {
                     Response.Listener { response ->
                         val gson = Gson()
                         var userList: Array<Akun> = gson.fromJson(response,Array<Akun>::class.java)
-                        if(userList.isEmpty()){
-                            Toast.makeText(this@MainActivity, "Password Tidak boleh Kosong!", Toast.LENGTH_SHORT).show()
-                            //FancyToast.makeText(this@MainActivity, "Tidak ada user terdaftar", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show()
-                        }else{
-
-                            for (akun in userList){
-                                if(username == akun.username){
-                                    if(password == akun.password){
-                                        checkLogin = true
-                                        sharedPreferences = getSharedPreferences(pref, Context.MODE_PRIVATE)
-                                        val editor: SharedPreferences.Editor = sharedPreferences!!.edit()
-                                        akun.id?.let { it1 -> editor.putInt(key, it1) }
-                                        editor.apply()
-                                        checkLogin = true
-                                        break
-                                    }else{
-                                        Toast.makeText(this@MainActivity, "Password Tidak boleh Kosong!", Toast.LENGTH_SHORT).show()
-                                        //FancyToast.makeText(this@MainActivity, "Password salah", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show()
-                                    }
+                        for (akun in userList){
+                            if(username == akun.username){
+                                if(password == akun.password){
+                                    checkLogin = true
+                                    dataTemp.putString("idKey",akun.username)
+//                                        sharedPreferences = getSharedPreferences(pref, Context.MODE_PRIVATE)
+//                                        val editor: SharedPreferences.Editor = sharedPreferences!!.edit()
+//                                        akun.id?.let { it1 -> editor.putInt(key, it1) }
+//                                        editor.apply()
+//                                        checkLogin = true
+                                    binding.btnLogin.hideLoading()
+                                    break
+                                }else{
+                                    FancyToast.makeText(this,"Password Salah",FancyToast.LENGTH_LONG,FancyToast.ERROR,true);
                                 }
                             }
-
-                            if(!checkLogin){
-                                Toast.makeText(this@MainActivity, "Password Tidak boleh Kosong!", Toast.LENGTH_SHORT).show()
-                                //FancyToast.makeText(this@MainActivity, "Username salah", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show()
-                            }else{
-                                Toast.makeText(this@MainActivity, "Password Tidak boleh Kosong!", Toast.LENGTH_SHORT).show()
-                                //FancyToast.makeText(this@MainActivity, "Login Successful!", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show()
-
-                                val moveHome = Intent(this@MainActivity, HomeActivity::class.java)
-
-                                startActivity(moveHome)
-                            }
-
                         }
+
+                        if(!checkLogin){
+                            FancyToast.makeText(this@MainActivity, "Username salah", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show()
+                        }else{
+                            FancyToast.makeText(this@MainActivity, "Berhasil Login!", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show()
+
+                            val moveHome = Intent(this@MainActivity, HomeActivity::class.java)
+
+                            startActivity(moveHome.putExtra("idKey",dataTemp))
+                        }
+
+
                     },Response.ErrorListener { error ->
+                        binding.btnLogin.hideLoading()
                         try {
                             val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
                             val errors = JSONObject(responseBody)
                             Toast.makeText(this@MainActivity, errors.getString("Error: message"), Toast.LENGTH_SHORT).show()
-                            //FancyToast.makeText(
-//                                this@MainActivity,
-//                                errors.getString("Error: message"),
-//                                FancyToast.LENGTH_SHORT,
-//                                FancyToast.ERROR,
-//                                false
-//                            ).show()
+                            FancyToast.makeText(this@MainActivity, errors.getString("Error: message"), FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show()
                         }catch (e: java.lang.Exception){
                             Log.d("Error di mana", e.message.toString())
-                            Toast.makeText(this@MainActivity, e.message, Toast.LENGTH_SHORT).show()
-                            //FancyToast.makeText(this@MainActivity, e.message, FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show()
+                            FancyToast.makeText(this@MainActivity, e.message, FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show()
                         }
                     }
                 ){
@@ -244,6 +235,7 @@ class MainActivity : AppCompatActivity() {
         }
         else{
             val akun = Akun(
+
                 etUsername!!.toString(),
                 etPassword!!.toString(),
                 "","",""

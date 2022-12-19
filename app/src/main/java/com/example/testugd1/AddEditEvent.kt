@@ -5,47 +5,40 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.Button
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.android.volley.AuthFailureError
-import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.testugd1.api.DestinasiApi
-import com.example.testugd1.models.Destinasi
-import com.example.testugd1.api.DestinasiApi.Companion.GET_BY_ID_URL
+import com.example.testugd1.api.EventApi
+import com.example.testugd1.models.Event
 import com.google.gson.Gson
 import org.json.JSONObject
 import java.nio.charset.StandardCharsets
 
-class AddEditDestinasi : AppCompatActivity() {
+class AddEditEvent : AppCompatActivity() {
+
     companion object {
-        private val TIPE_LIST = arrayOf("Alam", "Buatan")
+        private val TIPE_LIST = arrayOf("Konser Musik", "Pagelaran Budaya", "Pameran Seni", "Tarian Daerah")
     }
 
     private var etNama: EditText? = null
     private var etLokasi: EditText? = null
     private var etHarga: EditText? = null
-    private var etType: AutoCompleteTextView? = null
+    private var etKategori: AutoCompleteTextView? = null
     private var layoutLoading: LinearLayout? = null
     private var queue: RequestQueue? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_edit_destinasi)
+        setContentView(R.layout.activity_add_edit_event)
 
         queue = Volley.newRequestQueue(this)
         etNama = findViewById(R.id.et_nama)
         etLokasi = findViewById(R.id.et_Lokasi)
         etHarga = findViewById(R.id.et_Harga)
-        etType = findViewById(R.id.et_Tipe)
+        etKategori = findViewById(R.id.et_Kategori)
         layoutLoading = findViewById(R.id.layout_loading)
 
         setExposedDropDownMenu()
@@ -53,44 +46,44 @@ class AddEditDestinasi : AppCompatActivity() {
         val btnCancel = findViewById<Button>(R.id.btn_cancel)
         btnCancel.setOnClickListener { finish() }
         val btnSave = findViewById<Button>(R.id.btn_save)
-        val tvTitle = findViewById<TextView>(R.id.addDestinasi)
+        val tvTitle = findViewById<TextView>(R.id.addEvent)
         val id = intent.getLongExtra("id", -1)
         if (id == -1L) {
-            tvTitle.setText("Tambah Destinasi")
-            btnSave.setOnClickListener { createDestinasi() }
+            tvTitle.setText("Tambah Event")
+            btnSave.setOnClickListener { createEvent() }
         } else {
-            tvTitle.setText("Edit Destinasi")
-            getDestinasiById(id)
-            btnSave.setOnClickListener { updateDestinasi(id) }
+            tvTitle.setText("Edit Event")
+            getEventById(id)
+            btnSave.setOnClickListener { updateEvent(id) }
         }
     }
 
     fun setExposedDropDownMenu() {
-        val adapterType: ArrayAdapter<String> = ArrayAdapter<String>(this,
-            R.layout.destinasi_list, TIPE_LIST)
-        etType!!.setAdapter(adapterType)
+        val adapterKategori: ArrayAdapter<String> = ArrayAdapter<String>(this,
+            R.layout.event_list, TIPE_LIST)
+        etKategori!!.setAdapter(adapterKategori)
 
     }
 
-    private fun getDestinasiById(id: Long) {
-        // fungsi untuk menampilkan data Destinasi berdasarkan id
+    private fun getEventById(id: Long) {
+        // fungsi untuk menampilkan data Event berdasarkan id
         setLoading(true)
         val stringRequest: StringRequest = object :
             StringRequest(
                 Method.GET,
-                DestinasiApi.GET_BY_ID_URL + id,
+                EventApi.GET_BY_ID_URL + id,
                 Response.Listener { response ->
                     val gson = Gson()
-                    val destinasi = gson.fromJson(response, Destinasi::class.java)
+                    val event = gson.fromJson(response, Event::class.java)
 
-                    etNama!!.setText(destinasi.nama)
-                    etLokasi!!.setText(destinasi.lokasi)
-                    etHarga!!.setText(destinasi.harga)
-                    etType!!.setText(destinasi.tipe)
+                    etNama!!.setText(event.nama)
+                    etLokasi!!.setText(event.lokasi)
+                    etHarga!!.setText(event.harga)
+                    etKategori!!.setText(event.kategori)
                     setExposedDropDownMenu()
 
                     Toast.makeText(
-                        this@AddEditDestinasi,
+                        this@AddEditEvent,
                         "Data berhasil diambil!",
                         Toast.LENGTH_SHORT
                     ).show()
@@ -103,12 +96,12 @@ class AddEditDestinasi : AppCompatActivity() {
                             String(error.networkResponse.data, StandardCharsets.UTF_8)
                         val errors = JSONObject(responseBody)
                         Toast.makeText(
-                            this@AddEditDestinasi,
+                            this@AddEditEvent,
                             errors.getString("message"),
                             Toast.LENGTH_SHORT
                         ).show()
                     } catch (e: Exception) {
-                        Toast.makeText(this@AddEditDestinasi, e.message, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@AddEditEvent, e.message, Toast.LENGTH_SHORT).show()
                     }
                 }) {
             @Throws(AuthFailureError::class)
@@ -121,37 +114,37 @@ class AddEditDestinasi : AppCompatActivity() {
         queue!!.add(stringRequest)
     }
 
-    private fun createDestinasi() {
+    private fun createEvent() {
         setLoading(true)
 
         if(etNama!!.text.toString().isEmpty()){
-            Toast.makeText(this@AddEditDestinasi, "Nama Destinasi Tidak boleh Kosong!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@AddEditEvent, "Nama Event Tidak boleh Kosong!", Toast.LENGTH_SHORT).show()
         }
         else if(etLokasi!!.text.toString().isEmpty()){
-            Toast.makeText(this@AddEditDestinasi, "Lokasi Destinasi Tidak boleh Kosong!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@AddEditEvent, "Lokasi Event Tidak boleh Kosong!", Toast.LENGTH_SHORT).show()
         }
         else if(etHarga!!.text.toString().isEmpty()){
-            Toast.makeText(this@AddEditDestinasi, "Harga Destinasi Tidak boleh Kosong!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@AddEditEvent, "Harga Event Tidak boleh Kosong!", Toast.LENGTH_SHORT).show()
         }
-        else if(etType!!.text.toString().isEmpty()){
-            Toast.makeText(this@AddEditDestinasi, "Tipe Destinasi Tidak boleh Kosong!", Toast.LENGTH_SHORT).show()
+        else if(etKategori!!.text.toString().isEmpty()){
+            Toast.makeText(this@AddEditEvent, "Tipe Event Tidak boleh Kosong!", Toast.LENGTH_SHORT).show()
         }
         else{
-            val destinasi = Destinasi(
+            val event = Event(
                 etNama!!.text.toString(),
                 etLokasi!!.text.toString(),
                 etHarga!!.text.toString(),
-                etType!!.text.toString(),
+                etKategori!!.text.toString(),
 
                 )
 
             val stringRequest: StringRequest =
-                object : StringRequest(Method.POST, DestinasiApi.ADD_URL, Response.Listener { response ->
+                object : StringRequest(Method.POST, EventApi.ADD_URL, Response.Listener { response ->
                     val gson = Gson()
-                    var destinasi = gson.fromJson(response, Destinasi::class.java)
+                    var event = gson.fromJson(response, Event::class.java)
 
-                    if (destinasi != null)
-                        Toast.makeText(this@AddEditDestinasi, "Data Berhasil Ditambahkan", Toast.LENGTH_SHORT).show()
+                    if (event != null)
+                        Toast.makeText(this@AddEditEvent, "Data Berhasil Ditambahkan", Toast.LENGTH_SHORT).show()
 
                     val returnIntent = Intent()
                     setResult(RESULT_OK, returnIntent)
@@ -164,12 +157,12 @@ class AddEditDestinasi : AppCompatActivity() {
                         val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
                         val errors = JSONObject(responseBody)
                         Toast.makeText(
-                            this@AddEditDestinasi,
+                            this@AddEditEvent,
                             errors.getString("message"),
                             Toast.LENGTH_SHORT
                         ).show()
                     } catch (e: Exception) {
-                        Toast.makeText(this@AddEditDestinasi, e.message, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@AddEditEvent, e.message, Toast.LENGTH_SHORT).show()
                     }
                 }) {
                     @Throws(AuthFailureError::class)
@@ -182,7 +175,7 @@ class AddEditDestinasi : AppCompatActivity() {
                     @Throws(AuthFailureError::class)
                     override fun getBody(): ByteArray {
                         val gson = Gson()
-                        val requestBody = gson.toJson(destinasi)
+                        val requestBody = gson.toJson(event)
                         return requestBody.toByteArray(StandardCharsets.UTF_8)
                     }
 
@@ -196,21 +189,21 @@ class AddEditDestinasi : AppCompatActivity() {
 
     }
 
-    private fun updateDestinasi(id: Long){
+    private fun updateEvent(id: Long){
         setLoading(true)
-        val destinasi = Destinasi(
+        val event = Event(
             etNama!!.text.toString(),
             etLokasi!!.text.toString(),
             etHarga!!.text.toString(),
-            etType!!.text.toString()
+            etKategori!!.text.toString()
         )
         val stringRequest: StringRequest =
-            object: StringRequest(Method.PUT, DestinasiApi.UPDATE_URL + id, Response.Listener { response ->
+            object: StringRequest(Method.PUT, EventApi.UPDATE_URL + id, Response.Listener { response ->
                 val gson = Gson()
-                var destinasi = gson.fromJson(response, Destinasi::class.java)
+                var Event = gson.fromJson(response, Event::class.java)
 
-                if(destinasi != null)
-                    Toast.makeText(this@AddEditDestinasi, "Data berhasil diubah", Toast.LENGTH_SHORT).show()
+                if(event != null)
+                    Toast.makeText(this@AddEditEvent, "Data berhasil diubah", Toast.LENGTH_SHORT).show()
 
                 val returnIntent = Intent()
                 setResult(RESULT_OK, returnIntent)
@@ -228,7 +221,7 @@ class AddEditDestinasi : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                 } catch (e: Exception){
-                    Toast.makeText(this@AddEditDestinasi, e.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@AddEditEvent, e.message, Toast.LENGTH_SHORT).show()
                 }
             }){
                 @Throws(AuthFailureError::class)
@@ -241,11 +234,11 @@ class AddEditDestinasi : AppCompatActivity() {
                 @Throws(AuthFailureError::class)
                 override fun getBody(): ByteArray {
                     val gson = Gson()
-                    val requestBody = gson.toJson(destinasi)
+                    val requestBody = gson.toJson(event)
                     return requestBody.toByteArray(StandardCharsets.UTF_8)
                 }
 
-                override fun getBodyContentType(): String {
+                 override fun getBodyContentType(): String {
                     return "application/json"
                 }
             }
@@ -264,5 +257,4 @@ class AddEditDestinasi : AppCompatActivity() {
             layoutLoading!!.visibility = View.INVISIBLE
         }
     }
-
 }

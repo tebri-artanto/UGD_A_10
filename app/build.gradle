@@ -95,4 +95,10 @@ dependencies {
 
 // Optional -- UI testing with UI Automator
     androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
+
+// Fancy Toast
+    implementation 'io.github.shashank02051997:FancyToast:2.0.2'
+
+// Loading Button
+    implementation 'com.github.koushikcse:LoadingButton:1.7'
 }

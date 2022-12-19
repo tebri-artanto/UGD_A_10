@@ -22,10 +22,13 @@ class HomeActivity : AppCompatActivity() {
     lateinit var navigation2: BottomNavigationView
     private lateinit var sharedPref: SharedPreferences
     private lateinit var binding: ActivityHomeBinding
+    lateinit var bundle: Bundle
+    var key = "idKey"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+        val akunId = getBundle()
 //        setContentView(R.layout.activity_home)
 //        navController = findNavController(R.id.frame_layout)
 //        setupActionBarWithNavController(navController)
@@ -36,7 +39,7 @@ class HomeActivity : AppCompatActivity() {
             when(item.itemId){
                 R.id.Search -> changeFragment(searchFragment())
                 R.id.Home -> changeFragment(HomeFragment())
-                R.id.Profile -> changeFragment(profileFragment())
+                R.id.Profile -> changeFragment(profileFragment(akunId))
             }
             true
         }
@@ -48,14 +51,14 @@ class HomeActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.Search -> changeFragment(searchFragment())
-               R.id.Home -> changeFragment(HomeFragment())
-               R.id.Profile -> changeFragment(profileFragment())
-        }
-        return super.onOptionsItemSelected(item)
-    }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        when(item.itemId){
+//            R.id.Search -> changeFragment(searchFragment())
+//               R.id.Home -> changeFragment(HomeFragment())
+//               R.id.Profile -> changeFragment(profileFragment(akunLogin = akunId))
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
 //    private fun setupSmoothBottomMenu() {
 //        val popupMenu = PopupMenu(this, null)
 //        popupMenu.inflate(R.menu.bottom_navigation_menu)
@@ -72,6 +75,11 @@ class HomeActivity : AppCompatActivity() {
         val transaction = manager.beginTransaction()
         transaction.replace(R.id.frame_layout, fragment)
         transaction.commit()
+    }
+    fun getBundle(): String {
+        bundle = intent.getBundleExtra("idKey")!!
+        var idAkun : String = bundle.getString("idKey")!!
+        return idAkun
     }
 //
 //    override fun onSupportNavigateUp(): Boolean {
