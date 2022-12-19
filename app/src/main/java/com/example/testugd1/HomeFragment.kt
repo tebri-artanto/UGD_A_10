@@ -44,7 +44,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        binding.buttonCreate.hideLoading()
         setupListener()
         setupRecyclerView()
         loadData()
@@ -123,6 +123,7 @@ class HomeFragment : Fragment() {
 
         fun setupListener() {
             binding.buttonCreate.setOnClickListener{
+                binding.buttonCreate.showLoading()
                 intentEdit(0,Constant.TYPE_CREATE)
             }
         }

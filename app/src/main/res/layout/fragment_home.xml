@@ -31,10 +31,10 @@
         android:layout_marginEnd="15dp"
         tools:listitem="@layout/activity_pariwisata_adapter" />
 
-    <Button
+    <com.kusu.loadingbutton.LoadingButton
         android:id="@+id/button_create"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
         android:layout_marginHorizontal="100dp"
         android:layout_marginVertical="560dp"
         android:backgroundTint="@color/greenBtnColor"

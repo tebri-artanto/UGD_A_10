@@ -93,7 +93,6 @@ class QRMain : AppCompatActivity(), View.OnClickListener {
                     binding.scanBtn.hideLoading()
                 } else {
                     detectResultFromImage()
-                    binding.scanBtn.hideLoading()
                 }
             }
         }
