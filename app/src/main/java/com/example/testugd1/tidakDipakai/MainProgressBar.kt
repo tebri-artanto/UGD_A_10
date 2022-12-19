@@ -1,11 +1,14 @@
 package com.example.testugd1.tidakDipakai
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.example.testugd1.HomeActivity
 import com.example.testugd1.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Picasso
 
 class MainProgressBar : AppCompatActivity() {
@@ -19,7 +22,11 @@ class MainProgressBar : AppCompatActivity() {
 
         val imgGlide = findViewById<ImageView>(R.id.ImgViewGlide)
         val imgPicasso = findViewById<ImageView>(R.id.ImgViewPicasso)
-
+//        val fabback = findViewById<FloatingActionButton>(R.id)
+//        fabback.setOnClickListener {
+//            val moveHome = Intent(this, HomeActivity::class.java)
+//            startActivity(moveHome)
+//        }
         //Now ImageView with Glide Library
         Glide
             .with(this)

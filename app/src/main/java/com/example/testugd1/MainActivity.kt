@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity() {
         }
         val moveHome = Intent(this, HomeActivity::class.java)
         binding.btnLogin.setOnClickListener(View.OnClickListener {
-            binding.btnLogin.showLoading()
+
             var checkLogin = false
             val username: String = etUsername.getText().toString()
             val password: String = etPassword.getText().toString()
@@ -142,15 +142,18 @@ class MainActivity : AppCompatActivity() {
 //                                        akun.id?.let { it1 -> editor.putInt(key, it1) }
 //                                        editor.apply()
 //                                        checkLogin = true
-                                    binding.btnLogin.hideLoading()
+
                                     break
                                 }else{
+
                                     FancyToast.makeText(this,"Password Salah",FancyToast.LENGTH_LONG,FancyToast.ERROR,true);
                                 }
                             }
+
                         }
 
                         if(!checkLogin){
+
                             FancyToast.makeText(this@MainActivity, "Username salah", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show()
                         }else{
                             FancyToast.makeText(this@MainActivity, "Berhasil Login!", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show()
@@ -162,7 +165,7 @@ class MainActivity : AppCompatActivity() {
 
 
                     },Response.ErrorListener { error ->
-                        binding.btnLogin.hideLoading()
+
                         try {
                             val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
                             val errors = JSONObject(responseBody)

@@ -28,7 +28,7 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        val akunId = getBundle()
+       // val akunId = getBundle()
 //        setContentView(R.layout.activity_home)
 //        navController = findNavController(R.id.frame_layout)
 //        setupActionBarWithNavController(navController)
@@ -39,7 +39,7 @@ class HomeActivity : AppCompatActivity() {
             when(item.itemId){
                 R.id.Search -> changeFragment(searchFragment())
                 R.id.Home -> changeFragment(HomeFragment())
-                R.id.Profile -> changeFragment(profileFragment(akunId))
+                R.id.Profile -> changeFragment(profileFragment())
             }
             true
         }

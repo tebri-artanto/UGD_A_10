@@ -8,18 +8,31 @@
     android:focusableInTouchMode="true"
     tools:context=".DestinasiMain">
 
-    <SearchView
-        android:id="@+id/sv_destinasi"
-        android:layout_width="match_parent"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_back"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        app:layout_constraintBottom_toTopOf="@+id/sr_destinasi"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/sv_destinasi"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!--    bikin bisa ngesap di rv-->
+
+    <SearchView
+        android:id="@+id/sv_destinasi"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:iconifiedByDefault="false"
         android:queryHint="Cari"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <!--    bikin bisa ngesap di rv-->
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/sr_destinasi"
