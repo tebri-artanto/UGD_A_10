@@ -35,10 +35,10 @@ class TiketAdapter (private var TiketList: List<Tiket>, context: Context) :
     }
 
     override fun getItemCount(): Int {
-        return filteredTiketList.size
+        return filteredTiketList.size 
     }
 
-    fun setTiketList(TIketList: Array<Tiket>) {
+    fun setTiketList(TiketList: Array<Tiket>) {
         this.TiketList = TiketList.toList()
         filteredTiketList = TiketList.toMutableList()
     }
