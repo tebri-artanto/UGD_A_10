@@ -22,7 +22,6 @@ import com.example.testugd1.models.Tiket
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 import com.example.testugd1.adapters.TiketAdapter
-import kotlinx.android.synthetic.main.activity_tiket_main.*
 import org.json.JSONObject
 import java.nio.charset.StandardCharsets
 
@@ -72,15 +71,15 @@ class TiketMain : AppCompatActivity() {
     }
 
     private fun allTiket() {
-        sr_tiket!!.isRefreshing = true
+        srTiket!!.isRefreshing = true
         val stringRequest: StringRequest = object :
             StringRequest(Method.GET, TiketApi.GET_ALL_URL, Response.Listener { response ->
                 val gson = Gson()
                 var Tiket : Array<Tiket> = gson.fromJson(response, Array<Tiket>::class.java)
 
                 adapter!!.setTiketList(Tiket)
-                adapter!!.filter.filter(sv_tiket!!.query)
-                sr_tiket!!.isRefreshing = false
+                adapter!!.filter.filter(svTiket!!.query)
+                srTiket!!.isRefreshing = false
 
                 if(!Tiket.isEmpty())
                     Toast.makeText(this@TiketMain, "Data Berhasil Diambil!", Toast.LENGTH_SHORT)
@@ -89,7 +88,7 @@ class TiketMain : AppCompatActivity() {
                     Toast.makeText(this@TiketMain, "Data Kosong!", Toast.LENGTH_SHORT)
                         .show()
             }, Response.ErrorListener { error ->
-                sr_tiket!!.isRefreshing = false
+                srTiket!!.isRefreshing = false
                 try{
                     val responseBody =
                         String(error.networkResponse.data, StandardCharsets.UTF_8)

@@ -71,7 +71,7 @@ class searchFragment : Fragment() {
         }
 
         binding.btnBeliTiket.setOnClickListener{
-            val moveEdit = Intent(activity, activity_beli_tiket::class.java)
+            val moveEdit = Intent(activity, TiketMain::class.java)
             startActivity(moveEdit)
             activity?.finish()
         }

@@ -32,6 +32,13 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".TiketMain"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".QRMain"
             android:exported="false">
             <meta-data

@@ -31,7 +31,7 @@ class activity_beli_tiket : AppCompatActivity() {
     private var etNama: EditText? = null
     private var etJumlah: EditText? = null
     private var etWisata: EditText? = null
-    private var etType: AutoCompleteTextView? = null
+    private var etPembayaran: AutoCompleteTextView? = null
     private var layoutLoading: LinearLayout? = null
     private var queue: RequestQueue? = null
 
@@ -43,7 +43,7 @@ class activity_beli_tiket : AppCompatActivity() {
         etNama = findViewById(R.id.et_Nama)
         etJumlah = findViewById(R.id.et_Jumlah)
         etWisata = findViewById(R.id.et_Wisata)
-        etType = findViewById(R.id.et_Tipe)
+        etPembayaran = findViewById(R.id.et_Pembayaran)
         layoutLoading = findViewById(R.id.layout_loading)
 
         setExposedDropDownMenu()
@@ -66,7 +66,7 @@ class activity_beli_tiket : AppCompatActivity() {
     fun setExposedDropDownMenu() {
         val adapterType: ArrayAdapter<String> = ArrayAdapter<String>(this,
             R.layout.tipe_pembayaran_list, TIPE_LIST)
-        etType!!.setAdapter(adapterType)
+        etPembayaran!!.setAdapter(adapterType)
     }
 
     private fun getTiketById(id: Long) {
@@ -83,7 +83,7 @@ class activity_beli_tiket : AppCompatActivity() {
                     etNama!!.setText(Tiket.nama)
                     etJumlah!!.setText(Tiket.jumlah)
                     etWisata!!.setText(Tiket.wisata)
-                    etType!!.setText(Tiket.pembayaran)
+                    etPembayaran!!.setText(Tiket.pembayaran)
                     setExposedDropDownMenu()
 
                     Toast.makeText(
@@ -130,7 +130,7 @@ class activity_beli_tiket : AppCompatActivity() {
         else if(etWisata!!.text.toString().isEmpty()){
             Toast.makeText(this@activity_beli_tiket, "Wisata Tujuan  Tidak boleh Kosong!", Toast.LENGTH_SHORT).show()
         }
-        else if(etType!!.text.toString().isEmpty()){
+        else if(etPembayaran!!.text.toString().isEmpty()){
             Toast.makeText(this@activity_beli_tiket, "Pilihan Pembayaran Tidak boleh Kosong!", Toast.LENGTH_SHORT).show()
         }
         else{
@@ -138,7 +138,7 @@ class activity_beli_tiket : AppCompatActivity() {
                 etNama!!.text.toString(),
                 etJumlah!!.text.toString(),
                 etWisata!!.text.toString(),
-                etType!!.text.toString(),
+                etPembayaran!!.text.toString(),
 
                 )
 
@@ -199,7 +199,7 @@ class activity_beli_tiket : AppCompatActivity() {
             etNama!!.text.toString(),
             etJumlah!!.text.toString(),
             etWisata!!.text.toString(),
-            etType!!.text.toString()
+            etPembayaran!!.text.toString()
         )
         val stringRequest: StringRequest =
             object: StringRequest(Method.PUT, TiketApi.UPDATE_URL + id, Response.Listener { response ->

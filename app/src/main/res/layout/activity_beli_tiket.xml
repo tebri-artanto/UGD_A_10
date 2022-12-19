@@ -78,7 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="1dp"
-            android:hint="Wisata TUjuan"
+            android:hint="Wisata Tujuan"
             app:errorEnabled="true"
             app:startIconDrawable="@drawable/ic_baseline_type">
 
@@ -97,6 +97,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:hint="Tipe Pembayaran"
             app:startIconDrawable="@drawable/ic_baseline_attach_money_24">
 
